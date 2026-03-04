@@ -17,32 +17,27 @@ import { toast } from "sonner";
 
 // Block definitions based on the territorial map
 const blocks: BlockDef[] = [
-  // Row 1 (top)
-  { id: "E-14", label: "E-14", lots: 5, x: 0, y: 0, w: 2, h: 1, color: "bg-red-400" },
-  { id: "E-15", label: "E-15", lots: 15, x: 2, y: 0, w: 3, h: 1, color: "bg-orange-300" },
-  { id: "E-11", label: "E-11", lots: 12, x: 5, y: 0, w: 2, h: 1, color: "bg-green-400" },
-  { id: "F-11", label: "F-11", lots: 10, x: 7, y: 0, w: 2, h: 1, color: "bg-yellow-200" },
-  { id: "F-13", label: "F-13", lots: 17, x: 9, y: 0, w: 2, h: 1, color: "bg-teal-700" },
-  { id: "F-15", label: "F-15", lots: 10, x: 11, y: 0, w: 2, h: 1, color: "bg-red-500" },
-  { id: "F-17", label: "F-17", lots: 8, x: 13, y: 0, w: 2, h: 1, color: "bg-yellow-500" },
-
-  // Row 2
-  { id: "E-12", label: "E-12", lots: 7, x: 0, y: 1, w: 2, h: 1, color: "bg-teal-700" },
-  { id: "E-6", label: "E-6", lots: 6, x: 2, y: 1, w: 1, h: 1, color: "bg-yellow-400" },
-  { id: "E-7", label: "E-7", lots: 15, x: 3, y: 1, w: 2, h: 1, color: "bg-green-500" },
-  { id: "E-9", label: "E-9", lots: 9, x: 5, y: 1, w: 2, h: 1, color: "bg-sky-300" },
-  { id: "F-6", label: "F-6", lots: 20, x: 7, y: 1, w: 2, h: 1, color: "bg-red-500" },
-  { id: "F-10", label: "F-10", lots: 10, x: 9, y: 1, w: 2, h: 1, color: "bg-yellow-300" },
-  { id: "F-9", label: "F-9", lots: 9, x: 11, y: 1, w: 2, h: 1, color: "bg-green-400" },
-  { id: "F-16", label: "F-16", lots: 6, x: 13, y: 1, w: 2, h: 1, color: "bg-sky-200" },
-
-  // Row 3
-  { id: "E-3", label: "E-3", lots: 6, x: 0, y: 2, w: 2, h: 1, color: "bg-pink-300" },
-  { id: "E-5", label: "E-5", lots: 10, x: 2, y: 2, w: 2, h: 1, color: "bg-lime-400" },
-  { id: "E-2", label: "E-2", lots: 13, x: 0, y: 3, w: 3, h: 1, color: "bg-orange-200" },
-  { id: "F-5", label: "F-5", lots: 17, x: 5, y: 3, w: 3, h: 1, color: "bg-yellow-400" },
-  { id: "F-4", label: "F-4", lots: 10, x: 8, y: 3, w: 2, h: 1, color: "bg-sky-400" },
-  { id: "F-3", label: "F-3", lots: 10, x: 10, y: 3, w: 2, h: 1, color: "bg-pink-300" },
+  { id: "E-2", label: "E-2", lots: 13, x: 0, y: 0, w: 1, h: 1, color: "bg-orange-200" },
+  { id: "E-3", label: "E-3", lots: 6, x: 1, y: 0, w: 1, h: 1, color: "bg-pink-300" },
+  { id: "E-5", label: "E-5", lots: 10, x: 2, y: 0, w: 1, h: 1, color: "bg-lime-400" },
+  { id: "E-6", label: "E-6", lots: 6, x: 3, y: 0, w: 1, h: 1, color: "bg-yellow-400" },
+  { id: "E-7", label: "E-7", lots: 15, x: 4, y: 0, w: 1, h: 1, color: "bg-green-500" },
+  { id: "E-9", label: "E-9", lots: 9, x: 5, y: 0, w: 1, h: 1, color: "bg-sky-300" },
+  { id: "E-11", label: "E-11", lots: 12, x: 6, y: 0, w: 1, h: 1, color: "bg-green-400" },
+  { id: "E-12", label: "E-12", lots: 7, x: 7, y: 0, w: 1, h: 1, color: "bg-teal-700" },
+  { id: "E-14", label: "E-14", lots: 5, x: 8, y: 0, w: 1, h: 1, color: "bg-red-400" },
+  { id: "E-15", label: "E-15", lots: 15, x: 9, y: 0, w: 1, h: 1, color: "bg-orange-300" },
+  { id: "F-3", label: "F-3", lots: 10, x: 0, y: 1, w: 1, h: 1, color: "bg-pink-300" },
+  { id: "F-4", label: "F-4", lots: 10, x: 1, y: 1, w: 1, h: 1, color: "bg-sky-400" },
+  { id: "F-5", label: "F-5", lots: 17, x: 2, y: 1, w: 1, h: 1, color: "bg-yellow-400" },
+  { id: "F-6", label: "F-6", lots: 20, x: 3, y: 1, w: 1, h: 1, color: "bg-red-500" },
+  { id: "F-9", label: "F-9", lots: 9, x: 4, y: 1, w: 1, h: 1, color: "bg-green-400" },
+  { id: "F-10", label: "F-10", lots: 10, x: 5, y: 1, w: 1, h: 1, color: "bg-yellow-300" },
+  { id: "F-11", label: "F-11", lots: 10, x: 6, y: 1, w: 1, h: 1, color: "bg-yellow-200" },
+  { id: "F-13", label: "F-13", lots: 17, x: 7, y: 1, w: 1, h: 1, color: "bg-teal-700" },
+  { id: "F-15", label: "F-15", lots: 10, x: 8, y: 1, w: 1, h: 1, color: "bg-red-500" },
+  { id: "F-16", label: "F-16", lots: 6, x: 9, y: 1, w: 1, h: 1, color: "bg-sky-200" },
+  { id: "F-17", label: "F-17", lots: 8, x: 10, y: 1, w: 1, h: 1, color: "bg-yellow-500" },
 ];
 
 interface BlockDef {
