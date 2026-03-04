@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Dialog,
   DialogContent,
@@ -14,42 +16,57 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-
-// Block definitions based on the territorial map
-const blocks: BlockDef[] = [
-  { id: "E-2", label: "E-2", lots: 13, x: 0, y: 0, w: 1, h: 1, color: "bg-orange-200" },
-  { id: "E-3", label: "E-3", lots: 6, x: 1, y: 0, w: 1, h: 1, color: "bg-pink-300" },
-  { id: "E-5", label: "E-5", lots: 10, x: 2, y: 0, w: 1, h: 1, color: "bg-lime-400" },
-  { id: "E-6", label: "E-6", lots: 6, x: 3, y: 0, w: 1, h: 1, color: "bg-yellow-400" },
-  { id: "E-7", label: "E-7", lots: 15, x: 4, y: 0, w: 1, h: 1, color: "bg-green-500" },
-  { id: "E-9", label: "E-9", lots: 9, x: 5, y: 0, w: 1, h: 1, color: "bg-sky-300" },
-  { id: "E-11", label: "E-11", lots: 12, x: 6, y: 0, w: 1, h: 1, color: "bg-green-400" },
-  { id: "E-12", label: "E-12", lots: 7, x: 7, y: 0, w: 1, h: 1, color: "bg-teal-700" },
-  { id: "E-14", label: "E-14", lots: 5, x: 8, y: 0, w: 1, h: 1, color: "bg-red-400" },
-  { id: "E-15", label: "E-15", lots: 15, x: 9, y: 0, w: 1, h: 1, color: "bg-orange-300" },
-  { id: "F-3", label: "F-3", lots: 10, x: 0, y: 1, w: 1, h: 1, color: "bg-pink-300" },
-  { id: "F-4", label: "F-4", lots: 10, x: 1, y: 1, w: 1, h: 1, color: "bg-sky-400" },
-  { id: "F-5", label: "F-5", lots: 17, x: 2, y: 1, w: 1, h: 1, color: "bg-yellow-400" },
-  { id: "F-6", label: "F-6", lots: 20, x: 3, y: 1, w: 1, h: 1, color: "bg-red-500" },
-  { id: "F-9", label: "F-9", lots: 9, x: 4, y: 1, w: 1, h: 1, color: "bg-green-400" },
-  { id: "F-10", label: "F-10", lots: 10, x: 5, y: 1, w: 1, h: 1, color: "bg-yellow-300" },
-  { id: "F-11", label: "F-11", lots: 10, x: 6, y: 1, w: 1, h: 1, color: "bg-yellow-200" },
-  { id: "F-13", label: "F-13", lots: 17, x: 7, y: 1, w: 1, h: 1, color: "bg-teal-700" },
-  { id: "F-15", label: "F-15", lots: 10, x: 8, y: 1, w: 1, h: 1, color: "bg-red-500" },
-  { id: "F-16", label: "F-16", lots: 6, x: 9, y: 1, w: 1, h: 1, color: "bg-sky-200" },
-  { id: "F-17", label: "F-17", lots: 8, x: 10, y: 1, w: 1, h: 1, color: "bg-yellow-500" },
-];
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface BlockDef {
   id: string;
   label: string;
   lots: number;
-  x: number;
-  y: number;
-  w: number;
-  h: number;
   color: string;
 }
+
+const blocks: BlockDef[] = [
+  { id: "E-2", label: "E-2", lots: 13, color: "bg-orange-200" },
+  { id: "E-3", label: "E-3", lots: 6, color: "bg-pink-300" },
+  { id: "E-5", label: "E-5", lots: 10, color: "bg-lime-400" },
+  { id: "E-6", label: "E-6", lots: 6, color: "bg-yellow-400" },
+  { id: "E-7", label: "E-7", lots: 15, color: "bg-green-500" },
+  { id: "E-9", label: "E-9", lots: 9, color: "bg-sky-300" },
+  { id: "E-11", label: "E-11", lots: 12, color: "bg-green-400" },
+  { id: "E-12", label: "E-12", lots: 7, color: "bg-teal-700" },
+  { id: "E-14", label: "E-14", lots: 5, color: "bg-red-400" },
+  { id: "E-15", label: "E-15", lots: 15, color: "bg-orange-300" },
+  { id: "F-3", label: "F-3", lots: 10, color: "bg-pink-300" },
+  { id: "F-4", label: "F-4", lots: 10, color: "bg-sky-400" },
+  { id: "F-5", label: "F-5", lots: 17, color: "bg-yellow-400" },
+  { id: "F-6", label: "F-6", lots: 20, color: "bg-red-500" },
+  { id: "F-9", label: "F-9", lots: 9, color: "bg-green-400" },
+  { id: "F-10", label: "F-10", lots: 10, color: "bg-yellow-300" },
+  { id: "F-11", label: "F-11", lots: 10, color: "bg-yellow-200" },
+  { id: "F-13", label: "F-13", lots: 17, color: "bg-teal-700" },
+  { id: "F-15", label: "F-15", lots: 10, color: "bg-red-500" },
+  { id: "F-16", label: "F-16", lots: 6, color: "bg-sky-200" },
+  { id: "F-17", label: "F-17", lots: 8, color: "bg-yellow-500" },
+];
+
+interface FamilyMember {
+  name: string;
+  relation: string;
+  age: string;
+  sex: string;
+  pregnant: boolean;
+  bp: string;
+  weight: string;
+  height: string;
+  bmi: string;
+  diagnosis: string;
+  remarks: string;
+}
+
+const emptyMember: FamilyMember = {
+  name: "", relation: "", age: "", sex: "", pregnant: false,
+  bp: "", weight: "", height: "", bmi: "", diagnosis: "", remarks: "",
+};
 
 export default function PatientPortal() {
   const navigate = useNavigate();
@@ -57,16 +74,79 @@ export default function PatientPortal() {
   const [selectedLot, setSelectedLot] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
+  // Personal info state
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState("");
+  const [sex, setSex] = useState("");
+  const [contact, setContact] = useState("");
+  const [pregnant, setPregnant] = useState(false);
+  const [bp, setBp] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [bmi, setBmi] = useState("");
+  const [diagnosis, setDiagnosis] = useState("");
+  const [remarksPersonal, setRemarksPersonal] = useState("");
+
+  // Family members state
+  const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([{ ...emptyMember }]);
+
   const handleBlockClick = (block: BlockDef) => {
     setSelectedBlock(block);
     setSelectedLot("");
     setModalOpen(true);
   };
 
+  const resetForm = () => {
+    setFirstName(""); setLastName(""); setDob(""); setSex(""); setContact("");
+    setPregnant(false); setBp(""); setWeight(""); setHeight(""); setBmi("");
+    setDiagnosis(""); setRemarksPersonal("");
+    setFamilyMembers([{ ...emptyMember }]);
+  };
+
+  const updateFamilyMember = (index: number, field: keyof FamilyMember, value: any) => {
+    const updated = [...familyMembers];
+    updated[index] = { ...updated[index], [field]: value };
+    // Auto-calculate BMI
+    if (field === "weight" || field === "height") {
+      const w = parseFloat(field === "weight" ? value : updated[index].weight);
+      const h = parseFloat(field === "height" ? value : updated[index].height) / 100;
+      if (w > 0 && h > 0) {
+        updated[index].bmi = (w / (h * h)).toFixed(1);
+      }
+    }
+    setFamilyMembers(updated);
+  };
+
+  const addFamilyMember = () => {
+    setFamilyMembers([...familyMembers, { ...emptyMember }]);
+  };
+
+  const removeFamilyMember = (index: number) => {
+    if (familyMembers.length > 1) {
+      setFamilyMembers(familyMembers.filter((_, i) => i !== index));
+    }
+  };
+
+  // Auto-calculate personal BMI
+  const handlePersonalWeight = (v: string) => {
+    setWeight(v);
+    const w = parseFloat(v);
+    const h = parseFloat(height) / 100;
+    if (w > 0 && h > 0) setBmi((w / (h * h)).toFixed(1));
+  };
+  const handlePersonalHeight = (v: string) => {
+    setHeight(v);
+    const w = parseFloat(weight);
+    const h = parseFloat(v) / 100;
+    if (w > 0 && h > 0) setBmi((w / (h * h)).toFixed(1));
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast.success(`Information saved for Block ${selectedBlock?.label}, Lot ${selectedLot}`);
+    toast.success(`Family health profile saved for Block ${selectedBlock?.label}, Lot ${selectedLot}`);
     setModalOpen(false);
+    resetForm();
   };
 
   return (
@@ -94,7 +174,7 @@ export default function PatientPortal() {
           <MapPin className="h-5 w-5 text-primary shrink-0" />
           <div>
             <p className="text-sm font-semibold text-card-foreground">Select Your Home on the Map</p>
-            <p className="text-xs text-muted-foreground">Click on your block below to register or update your information.</p>
+            <p className="text-xs text-muted-foreground">Click on your block below to register your family health profile.</p>
           </div>
         </div>
       </div>
@@ -107,8 +187,7 @@ export default function PatientPortal() {
           </h2>
           <p className="text-center text-xs text-muted-foreground mb-4">TERRITORIAL MAP</p>
 
-          {/* Grid Map */}
-          <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-15 gap-1.5 sm:gap-2">
+          <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-11 gap-1.5 sm:gap-2">
             {blocks.map((block) => (
               <button
                 key={block.id}
@@ -117,8 +196,7 @@ export default function PatientPortal() {
                   relative group rounded-lg border-2 border-border/50
                   p-2 sm:p-3 transition-all duration-200
                   hover:scale-105 hover:shadow-lg hover:border-primary hover:z-10
-                  active:scale-95 cursor-pointer
-                  col-span-1
+                  active:scale-95 cursor-pointer col-span-1
                   ${block.color} bg-opacity-80 hover:bg-opacity-100
                 `}
                 title={`Block ${block.label} — ${block.lots} lots`}
@@ -142,87 +220,208 @@ export default function PatientPortal() {
         </div>
       </div>
 
-      {/* Modal */}
-      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
+      {/* Modal - Family Health Profiling */}
+      <Dialog open={modalOpen} onOpenChange={(open) => { setModalOpen(open); if (!open) resetForm(); }}>
+        <DialogContent className="max-w-3xl max-h-[90vh] p-0">
+          <DialogHeader className="px-6 pt-6 pb-0">
             <DialogTitle className="flex items-center gap-2">
               <Home className="h-5 w-5 text-primary" />
-              Block {selectedBlock?.label}
+              Family Health Profile — Block {selectedBlock?.label}
             </DialogTitle>
             <DialogDescription>
-              Enter your lot number and personal information below.
+              Fill out your household's health information. This data will be used for the Family Health Profiling Form.
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Block & Lot */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1.5">
-                <Label className="text-xs text-muted-foreground">Block</Label>
-                <Input value={selectedBlock?.label || ""} readOnly className="bg-muted" />
-              </div>
-              <div className="space-y-1.5">
-                <Label className="text-xs text-muted-foreground">Lot Number</Label>
-                <Select value={selectedLot} onValueChange={setSelectedLot} required>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select lot" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {selectedBlock &&
-                      Array.from({ length: selectedBlock.lots }, (_, i) => (
-                        <SelectItem key={i + 1} value={String(i + 1)}>
-                          Lot {i + 1}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
+          <form onSubmit={handleSubmit}>
+            <ScrollArea className="max-h-[calc(90vh-10rem)] px-6">
+              <Tabs defaultValue="personal" className="space-y-4 pb-4">
+                <TabsList className="w-full justify-start">
+                  <TabsTrigger value="personal" className="text-xs">Personal Info</TabsTrigger>
+                  <TabsTrigger value="health" className="text-xs">Health Data</TabsTrigger>
+                  <TabsTrigger value="family" className="text-xs">Family Members</TabsTrigger>
+                </TabsList>
 
-            {/* Personal Info */}
-            <div className="space-y-3">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label className="text-xs text-muted-foreground">First Name</Label>
-                  <Input required placeholder="Juan" />
-                </div>
-                <div className="space-y-1.5">
-                  <Label className="text-xs text-muted-foreground">Last Name</Label>
-                  <Input required placeholder="Dela Cruz" />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <Label className="text-xs text-muted-foreground">Date of Birth</Label>
-                  <Input type="date" required />
-                </div>
-                <div className="space-y-1.5">
-                  <Label className="text-xs text-muted-foreground">Sex</Label>
-                  <Select required>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Male">Male</SelectItem>
-                      <SelectItem value="Female">Female</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="space-y-1.5">
-                <Label className="text-xs text-muted-foreground">Contact Number</Label>
-                <Input type="tel" required placeholder="09171234567" />
-              </div>
-            </div>
+                {/* Tab 1: Personal Info */}
+                <TabsContent value="personal" className="space-y-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">Block</Label>
+                      <Input value={selectedBlock?.label || ""} readOnly className="bg-muted" />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">Lot Number</Label>
+                      <Select value={selectedLot} onValueChange={setSelectedLot} required>
+                        <SelectTrigger><SelectValue placeholder="Select lot" /></SelectTrigger>
+                        <SelectContent>
+                          {selectedBlock && Array.from({ length: selectedBlock.lots }, (_, i) => (
+                            <SelectItem key={i + 1} value={String(i + 1)}>Lot {i + 1}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">First Name</Label>
+                      <Input required placeholder="Juan" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">Last Name</Label>
+                      <Input required placeholder="Dela Cruz" value={lastName} onChange={e => setLastName(e.target.value)} />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">Date of Birth</Label>
+                      <Input type="date" required value={dob} onChange={e => setDob(e.target.value)} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">Sex</Label>
+                      <Select value={sex} onValueChange={setSex} required>
+                        <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Male">Male</SelectItem>
+                          <SelectItem value="Female">Female</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs text-muted-foreground">Contact Number</Label>
+                    <Input type="tel" required placeholder="09171234567" value={contact} onChange={e => setContact(e.target.value)} />
+                  </div>
+                </TabsContent>
 
-            <DialogFooter>
-              <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>
+                {/* Tab 2: Health Data (maps to Family Health Profiling columns) */}
+                <TabsContent value="health" className="space-y-4">
+                  <p className="text-xs text-muted-foreground">Your personal health data for the Family Health Profiling Form.</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">Blood Pressure</Label>
+                      <Input placeholder="120/80" value={bp} onChange={e => setBp(e.target.value)} />
+                    </div>
+                    <div className="flex items-center gap-2 pt-5">
+                      <Checkbox id="pregnant" checked={pregnant} onCheckedChange={(v) => setPregnant(v === true)} />
+                      <Label htmlFor="pregnant" className="text-xs">Pregnant</Label>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">Weight (kg)</Label>
+                      <Input type="number" placeholder="65" value={weight} onChange={e => handlePersonalWeight(e.target.value)} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">Height (cm)</Label>
+                      <Input type="number" placeholder="165" value={height} onChange={e => handlePersonalHeight(e.target.value)} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="text-xs text-muted-foreground">BMI</Label>
+                      <Input value={bmi} readOnly className="bg-muted" placeholder="Auto" />
+                    </div>
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs text-muted-foreground">Diagnosis / Condition</Label>
+                    <Input placeholder="e.g. Hypertension, None" value={diagnosis} onChange={e => setDiagnosis(e.target.value)} />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs text-muted-foreground">Remarks</Label>
+                    <Input placeholder="Additional notes" value={remarksPersonal} onChange={e => setRemarksPersonal(e.target.value)} />
+                  </div>
+                </TabsContent>
+
+                {/* Tab 3: Family Members */}
+                <TabsContent value="family" className="space-y-4">
+                  <p className="text-xs text-muted-foreground">Add household members. Each entry maps to a row in the Family Health Profiling Form.</p>
+                  {familyMembers.map((member, idx) => (
+                    <div key={idx} className="rounded-lg border p-4 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold text-card-foreground">Member {idx + 1}</span>
+                        {familyMembers.length > 1 && (
+                          <Button type="button" variant="ghost" size="sm" className="text-xs text-destructive h-6" onClick={() => removeFamilyMember(idx)}>
+                            Remove
+                          </Button>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Full Name</Label>
+                          <Input placeholder="Name" value={member.name} onChange={e => updateFamilyMember(idx, "name", e.target.value)} />
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Relation</Label>
+                          <Select value={member.relation} onValueChange={v => updateFamilyMember(idx, "relation", v)}>
+                            <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                            <SelectContent>
+                              {["Spouse", "Child", "Parent", "Sibling", "Other"].map(r => (
+                                <SelectItem key={r} value={r}>{r}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Age</Label>
+                          <Input type="number" placeholder="Age" value={member.age} onChange={e => updateFamilyMember(idx, "age", e.target.value)} />
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Sex</Label>
+                          <Select value={member.sex} onValueChange={v => updateFamilyMember(idx, "sex", v)}>
+                            <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="M">Male</SelectItem>
+                              <SelectItem value="F">Female</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Blood Pressure</Label>
+                          <Input placeholder="120/80" value={member.bp} onChange={e => updateFamilyMember(idx, "bp", e.target.value)} />
+                        </div>
+                        <div className="flex items-center gap-2 pt-5">
+                          <Checkbox checked={member.pregnant} onCheckedChange={v => updateFamilyMember(idx, "pregnant", v === true)} />
+                          <Label className="text-xs">Pregnant</Label>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-3 gap-3">
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Weight (kg)</Label>
+                          <Input type="number" placeholder="65" value={member.weight} onChange={e => updateFamilyMember(idx, "weight", e.target.value)} />
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Height (cm)</Label>
+                          <Input type="number" placeholder="165" value={member.height} onChange={e => updateFamilyMember(idx, "height", e.target.value)} />
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">BMI</Label>
+                          <Input value={member.bmi} readOnly className="bg-muted" placeholder="Auto" />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Diagnosis</Label>
+                          <Input placeholder="e.g. None" value={member.diagnosis} onChange={e => updateFamilyMember(idx, "diagnosis", e.target.value)} />
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Remarks</Label>
+                          <Input placeholder="Notes" value={member.remarks} onChange={e => updateFamilyMember(idx, "remarks", e.target.value)} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  <Button type="button" variant="outline" size="sm" onClick={addFamilyMember} className="w-full">
+                    + Add Family Member
+                  </Button>
+                </TabsContent>
+              </Tabs>
+            </ScrollArea>
+
+            <DialogFooter className="px-6 py-4 border-t">
+              <Button type="button" variant="outline" onClick={() => { setModalOpen(false); resetForm(); }}>
                 Cancel
               </Button>
               <Button type="submit" className="healthcare-gradient text-primary-foreground border-0">
                 <User className="h-4 w-4 mr-1" />
-                Submit
+                Submit Profile
               </Button>
             </DialogFooter>
           </form>

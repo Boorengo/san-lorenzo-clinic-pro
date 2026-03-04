@@ -18,8 +18,8 @@ const templates = [
   },
   {
     id: "target-list",
-    title: "Target Client List",
-    description: "DOH target client monitoring list",
+    title: "Target Client List (Doctor Logbook)",
+    description: "Daily consultation logbook for attending doctors",
     icon: FileText,
     status: "Active",
   },
