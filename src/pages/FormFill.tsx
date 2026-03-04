@@ -4,6 +4,7 @@ import { ArrowLeft, Save, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import DynamicTable, { ColumnDef } from "@/components/DynamicTable";
 
 const formTemplates: Record<string, { title: string; columns: ColumnDef[]; defaultData: Record<string, any>[] }> = {
