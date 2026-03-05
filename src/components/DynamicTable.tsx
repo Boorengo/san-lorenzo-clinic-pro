@@ -105,24 +105,24 @@ export default function DynamicTable({
 
   return (
     <div className={cn("rounded-xl border bg-card overflow-hidden", className)}>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead>
+          <thead className="sticky top-0 z-20">
             <tr className="border-b bg-muted/50">
-              <th className="sticky left-0 z-10 bg-muted/50 px-3 py-2.5 text-left text-xs font-semibold text-muted-foreground w-10">
+              <th className="sticky left-0 z-30 bg-muted/50 px-3 py-2.5 text-left text-xs font-semibold text-muted-foreground w-10">
                 #
               </th>
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className="px-3 py-2.5 text-left text-xs font-semibold text-muted-foreground whitespace-nowrap"
+                  className="px-3 py-2.5 text-left text-xs font-semibold text-muted-foreground whitespace-nowrap bg-muted/50"
                   style={{ minWidth: col.width || "140px" }}
                 >
                   {col.label}
                 </th>
               ))}
               {!readOnly && (
-                <th className="px-3 py-2.5 text-center text-xs font-semibold text-muted-foreground w-12" />
+                <th className="px-3 py-2.5 text-center text-xs font-semibold text-muted-foreground w-12 bg-muted/50" />
               )}
             </tr>
           </thead>

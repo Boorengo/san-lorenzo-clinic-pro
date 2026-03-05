@@ -4,7 +4,6 @@ import { ArrowLeft, Save, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import DynamicTable, { ColumnDef } from "@/components/DynamicTable";
 
 const formTemplates: Record<string, { title: string; columns: ColumnDef[]; defaultData: Record<string, any>[] }> = {
@@ -81,59 +80,57 @@ export default function FormFill() {
   const [year, setYear] = useState("2026");
 
   return (
-    <ScrollArea className="h-[calc(100vh-4rem)]">
-      <div className="space-y-6 p-1">
-        <div className="flex items-center gap-3">
-          <Link to="/forms">
-            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
-          </Link>
-          <div className="flex-1">
-            <h1 className="font-display text-2xl font-bold">{template.title}</h1>
-            <p className="text-sm text-muted-foreground">Fill out the form below</p>
-          </div>
-        </div>
-
-        {/* Month/Year selectors */}
-        <div className="flex flex-wrap gap-3">
-          <div className="space-y-1">
-            <Label className="text-xs text-muted-foreground">Month</Label>
-            <Select value={month} onValueChange={setMonth}>
-              <SelectTrigger className="w-36"><SelectValue /></SelectTrigger>
-              <SelectContent>
-                {["January","February","March","April","May","June","July","August","September","October","November","December"].map(m => (
-                  <SelectItem key={m} value={m}>{m}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-1">
-            <Label className="text-xs text-muted-foreground">Year</Label>
-            <Select value={year} onValueChange={setYear}>
-              <SelectTrigger className="w-24"><SelectValue /></SelectTrigger>
-              <SelectContent>
-                {["2024","2025","2026","2027"].map(y => (
-                  <SelectItem key={y} value={y}>{y}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
-        <DynamicTable columns={template.columns} data={data} onChange={setData} />
-
-        <div className="flex flex-wrap gap-3 justify-end">
-          <Button variant="outline" className="gap-1.5">
-            <Printer className="h-4 w-4" />
-            Print
+    <div className="space-y-6 p-1">
+      <div className="flex items-center gap-3">
+        <Link to="/forms">
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+            <ArrowLeft className="h-4 w-4" />
           </Button>
-          <Button className="healthcare-gradient text-primary-foreground border-0 gap-1.5">
-            <Save className="h-4 w-4" />
-            Save
-          </Button>
+        </Link>
+        <div className="flex-1">
+          <h1 className="font-display text-2xl font-bold">{template.title}</h1>
+          <p className="text-sm text-muted-foreground">Fill out the form below</p>
         </div>
       </div>
-    </ScrollArea>
+
+      {/* Month/Year selectors */}
+      <div className="flex flex-wrap gap-3">
+        <div className="space-y-1">
+          <Label className="text-xs text-muted-foreground">Month</Label>
+          <Select value={month} onValueChange={setMonth}>
+            <SelectTrigger className="w-36"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {["January","February","March","April","May","June","July","August","September","October","November","December"].map(m => (
+                <SelectItem key={m} value={m}>{m}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="space-y-1">
+          <Label className="text-xs text-muted-foreground">Year</Label>
+          <Select value={year} onValueChange={setYear}>
+            <SelectTrigger className="w-24"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {["2024","2025","2026","2027"].map(y => (
+                <SelectItem key={y} value={y}>{y}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      <DynamicTable columns={template.columns} data={data} onChange={setData} />
+
+      <div className="flex flex-wrap gap-3 justify-end">
+        <Button variant="outline" className="gap-1.5">
+          <Printer className="h-4 w-4" />
+          Print
+        </Button>
+        <Button className="healthcare-gradient text-primary-foreground border-0 gap-1.5">
+          <Save className="h-4 w-4" />
+          Save
+        </Button>
+      </div>
+    </div>
   );
 }
