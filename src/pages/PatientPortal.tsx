@@ -114,6 +114,14 @@ export default function PatientPortal() {
     setMembers(updated);
   };
 
+  const toggleHealthStatus = (index: number, status: string) => {
+    const current = members[index].healthStatus;
+    const updated = current.includes(status)
+      ? current.filter(s => s !== status)
+      : [...current, status];
+    updateMember(index, "healthStatus", updated);
+  };
+
   const addMember = () => setMembers([...members, emptyMember()]);
 
   const removeMember = (index: number) => {
