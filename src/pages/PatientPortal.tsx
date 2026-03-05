@@ -311,7 +311,7 @@ export default function PatientPortal() {
                         {healthStatusOptions.map(status => (
                           <div key={status} className="flex items-center gap-1.5">
                             <Checkbox
-                              checked={member.healthStatus.includes(status)}
+                              checked={(member.healthStatus || []).includes(status)}
                               onCheckedChange={() => toggleHealthStatus(idx, status)}
                             />
                             <Label className="text-xs">{status}</Label>
