@@ -64,8 +64,8 @@ interface HouseholdMember {
   remarks: string;
 }
 
-const emptyMember = (isHead = false): HouseholdMember => ({
-  name: "", relation: isHead ? "Head" : "", age: "", sex: "", dob: "", contact: "",
+const emptyMember = (): HouseholdMember => ({
+  name: "", relation: "", age: "", sex: "", dob: "", contact: "",
   pregnant: false, bp: "", weight: "", height: "", bmi: "", diagnosis: "", remarks: "",
 });
 
@@ -74,7 +74,7 @@ export default function PatientPortal() {
   const [selectedBlock, setSelectedBlock] = useState<BlockDef | null>(null);
   const [selectedLot, setSelectedLot] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [members, setMembers] = useState<HouseholdMember[]>([emptyMember(true)]);
+  const [members, setMembers] = useState<HouseholdMember[]>([emptyMember()]);
 
   const handleBlockClick = (block: BlockDef) => {
     setSelectedBlock(block);
@@ -83,7 +83,7 @@ export default function PatientPortal() {
   };
 
   const resetForm = () => {
-    setMembers([emptyMember(true)]);
+    setMembers([emptyMember()]);
   };
 
   const updateMember = (index: number, field: keyof HouseholdMember, value: any) => {
@@ -223,7 +223,7 @@ export default function PatientPortal() {
                   <div key={idx} className="rounded-lg border p-4 space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-card-foreground">
-                        {idx === 0 ? "👤 Head of Household" : `👥 Family Member ${idx}`}
+                        {idx === 0 ? "👤 Your Information" : `👥 Family Member ${idx}`}
                       </span>
                       {idx > 0 && (
                         <Button type="button" variant="ghost" size="sm" className="text-xs text-destructive h-6 gap-1" onClick={() => removeMember(idx)}>
@@ -240,18 +240,14 @@ export default function PatientPortal() {
                       </div>
                       <div className="space-y-1.5">
                         <Label className="text-xs text-muted-foreground">Relation</Label>
-                        {idx === 0 ? (
-                          <Input value="Head" readOnly className="bg-muted" />
-                        ) : (
-                          <Select value={member.relation} onValueChange={v => updateMember(idx, "relation", v)}>
-                            <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
-                            <SelectContent>
-                              {["Spouse", "Child", "Parent", "Sibling", "Other"].map(r => (
-                                <SelectItem key={r} value={r}>{r}</SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        )}
+                        <Select value={member.relation} onValueChange={v => updateMember(idx, "relation", v)}>
+                          <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                          <SelectContent>
+                            {["Head", "Spouse", "Child", "Parent", "Sibling", "Other"].map(r => (
+                              <SelectItem key={r} value={r}>{r}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div className="space-y-1.5">
                         <Label className="text-xs text-muted-foreground">Date of Birth</Label>
