@@ -74,7 +74,7 @@ export default function PatientPortal() {
   const [selectedBlock, setSelectedBlock] = useState<BlockDef | null>(null);
   const [selectedLot, setSelectedLot] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [members, setMembers] = useState<HouseholdMember[]>([emptyMember(true)]);
+  const [members, setMembers] = useState<HouseholdMember[]>([emptyMember()]);
 
   const handleBlockClick = (block: BlockDef) => {
     setSelectedBlock(block);
