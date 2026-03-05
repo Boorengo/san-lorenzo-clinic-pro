@@ -64,8 +64,8 @@ interface HouseholdMember {
   remarks: string;
 }
 
-const emptyMember = (isHead = false): HouseholdMember => ({
-  name: "", relation: isHead ? "Head" : "", age: "", sex: "", dob: "", contact: "",
+const emptyMember = (): HouseholdMember => ({
+  name: "", relation: "", age: "", sex: "", dob: "", contact: "",
   pregnant: false, bp: "", weight: "", height: "", bmi: "", diagnosis: "", remarks: "",
 });
 
