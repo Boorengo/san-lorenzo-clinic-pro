@@ -115,7 +115,7 @@ export default function PatientPortal() {
   };
 
   const toggleHealthStatus = (index: number, status: string) => {
-    const current = members[index].healthStatus;
+    const current = members[index].healthStatus || [];
     const updated = current.includes(status)
       ? current.filter(s => s !== status)
       : [...current, status];
