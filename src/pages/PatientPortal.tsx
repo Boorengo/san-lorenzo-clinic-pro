@@ -115,7 +115,7 @@ export default function PatientPortal() {
   };
 
   const toggleHealthStatus = (index: number, status: string) => {
-    const current = members[index].healthStatus;
+    const current = members[index].healthStatus || [];
     const updated = current.includes(status)
       ? current.filter(s => s !== status)
       : [...current, status];
@@ -311,7 +311,7 @@ export default function PatientPortal() {
                         {healthStatusOptions.map(status => (
                           <div key={status} className="flex items-center gap-1.5">
                             <Checkbox
-                              checked={member.healthStatus.includes(status)}
+                              checked={(member.healthStatus || []).includes(status)}
                               onCheckedChange={() => toggleHealthStatus(idx, status)}
                             />
                             <Label className="text-xs">{status}</Label>
