@@ -55,6 +55,14 @@ interface HouseholdMember {
   sex: string;
   dob: string;
   contact: string;
+  philhealth: string;
+  healthStatus: string[];
+  occupation: string;
+  fpMethod: string;
+  vaccineStatus: string;
+  ficDate: string;
+  defaulter: boolean;
+  vitADeworming: boolean;
   pregnant: boolean;
   bp: string;
   weight: string;
@@ -64,8 +72,15 @@ interface HouseholdMember {
   remarks: string;
 }
 
+const healthStatusOptions = [
+  "Normal", "TB Patient", "Malaria", "Filariasis", "Altapresyon",
+  "Diabetes", "Sakit sa Puso", "PWD", "Buntis",
+];
+
 const emptyMember = (): HouseholdMember => ({
   name: "", relation: "", age: "", sex: "", dob: "", contact: "",
+  philhealth: "", healthStatus: [], occupation: "", fpMethod: "",
+  vaccineStatus: "", ficDate: "", defaulter: false, vitADeworming: false,
   pregnant: false, bp: "", weight: "", height: "", bmi: "", diagnosis: "", remarks: "",
 });
 
@@ -97,6 +112,14 @@ export default function PatientPortal() {
       }
     }
     setMembers(updated);
+  };
+
+  const toggleHealthStatus = (index: number, status: string) => {
+    const current = members[index].healthStatus;
+    const updated = current.includes(status)
+      ? current.filter(s => s !== status)
+      : [...current, status];
+    updateMember(index, "healthStatus", updated);
   };
 
   const addMember = () => setMembers([...members, emptyMember()]);
@@ -271,9 +294,33 @@ export default function PatientPortal() {
                         <Label className="text-xs text-muted-foreground">Contact Number</Label>
                         <Input type="tel" placeholder="09171234567" value={member.contact} onChange={e => updateMember(idx, "contact", e.target.value)} />
                       </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs text-muted-foreground">Unique PhilHealth Number</Label>
+                        <Input placeholder="PhilHealth #" value={member.philhealth} onChange={e => updateMember(idx, "philhealth", e.target.value)} />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label className="text-xs text-muted-foreground">Occupation / School Year</Label>
+                        <Input placeholder="e.g. Driver, Grade 5" value={member.occupation} onChange={e => updateMember(idx, "occupation", e.target.value)} />
+                      </div>
                     </div>
 
-                    {/* Health fields */}
+                    {/* Health Status */}
+                    <div className="border-t pt-3 mt-2">
+                      <p className="text-[11px] font-medium text-muted-foreground mb-2">Health Status</p>
+                      <div className="flex flex-wrap gap-x-4 gap-y-2">
+                        {healthStatusOptions.map(status => (
+                          <div key={status} className="flex items-center gap-1.5">
+                            <Checkbox
+                              checked={member.healthStatus.includes(status)}
+                              onCheckedChange={() => toggleHealthStatus(idx, status)}
+                            />
+                            <Label className="text-xs">{status}</Label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Health vitals */}
                     <div className="border-t pt-3 mt-2">
                       <p className="text-[11px] font-medium text-muted-foreground mb-2">Health Information</p>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -293,9 +340,45 @@ export default function PatientPortal() {
                           <Label className="text-xs text-muted-foreground">BMI</Label>
                           <Input value={member.bmi} readOnly className="bg-muted" placeholder="Auto" />
                         </div>
-                        <div className="flex items-center gap-2 pt-5">
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">FP Method</Label>
+                          <Select value={member.fpMethod} onValueChange={v => updateMember(idx, "fpMethod", v)}>
+                            <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                            <SelectContent>
+                              {["None", "Pills", "IUD", "Condom", "Injectable", "Implant", "LAM", "BTL", "Vasectomy", "SDM", "Other"].map(m => (
+                                <SelectItem key={m} value={m}>{m}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">Vaccine Status</Label>
+                          <Select value={member.vaccineStatus} onValueChange={v => updateMember(idx, "vaccineStatus", v)}>
+                            <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                            <SelectContent>
+                              {["Fully Immunized", "Partially Immunized", "Not Immunized", "Unknown"].map(v => (
+                                <SelectItem key={v} value={v}>{v}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-xs text-muted-foreground">FIC Date</Label>
+                          <Input type="date" value={member.ficDate} onChange={e => updateMember(idx, "ficDate", e.target.value)} />
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap gap-x-6 gap-y-2 mt-3">
+                        <div className="flex items-center gap-2">
                           <Checkbox checked={member.pregnant} onCheckedChange={v => updateMember(idx, "pregnant", v === true)} />
                           <Label className="text-xs">Pregnant</Label>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Checkbox checked={member.defaulter} onCheckedChange={v => updateMember(idx, "defaulter", v === true)} />
+                          <Label className="text-xs">Defaulter</Label>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Checkbox checked={member.vitADeworming} onCheckedChange={v => updateMember(idx, "vitADeworming", v === true)} />
+                          <Label className="text-xs">Received Vit. A and Deworming</Label>
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-3 mt-3">
