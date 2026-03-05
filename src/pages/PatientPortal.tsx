@@ -223,7 +223,7 @@ export default function PatientPortal() {
                   <div key={idx} className="rounded-lg border p-4 space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-card-foreground">
-                        {idx === 0 ? "👤 Head of Household" : `👥 Family Member ${idx}`}
+                        {idx === 0 ? "👤 Your Information" : `👥 Family Member ${idx}`}
                       </span>
                       {idx > 0 && (
                         <Button type="button" variant="ghost" size="sm" className="text-xs text-destructive h-6 gap-1" onClick={() => removeMember(idx)}>
