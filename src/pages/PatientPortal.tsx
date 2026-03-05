@@ -55,6 +55,14 @@ interface HouseholdMember {
   sex: string;
   dob: string;
   contact: string;
+  philhealth: string;
+  healthStatus: string[];
+  occupation: string;
+  fpMethod: string;
+  vaccineStatus: string;
+  ficDate: string;
+  defaulter: boolean;
+  vitADeworming: boolean;
   pregnant: boolean;
   bp: string;
   weight: string;
@@ -64,8 +72,15 @@ interface HouseholdMember {
   remarks: string;
 }
 
+const healthStatusOptions = [
+  "Normal", "TB Patient", "Malaria", "Filariasis", "Altapresyon",
+  "Diabetes", "Sakit sa Puso", "PWD", "Buntis",
+];
+
 const emptyMember = (): HouseholdMember => ({
   name: "", relation: "", age: "", sex: "", dob: "", contact: "",
+  philhealth: "", healthStatus: [], occupation: "", fpMethod: "",
+  vaccineStatus: "", ficDate: "", defaulter: false, vitADeworming: false,
   pregnant: false, bp: "", weight: "", height: "", bmi: "", diagnosis: "", remarks: "",
 });
 
