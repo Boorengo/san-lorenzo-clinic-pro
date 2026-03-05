@@ -240,18 +240,14 @@ export default function PatientPortal() {
                       </div>
                       <div className="space-y-1.5">
                         <Label className="text-xs text-muted-foreground">Relation</Label>
-                        {idx === 0 ? (
-                          <Input value="Head" readOnly className="bg-muted" />
-                        ) : (
-                          <Select value={member.relation} onValueChange={v => updateMember(idx, "relation", v)}>
-                            <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
-                            <SelectContent>
-                              {["Spouse", "Child", "Parent", "Sibling", "Other"].map(r => (
-                                <SelectItem key={r} value={r}>{r}</SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        )}
+                        <Select value={member.relation} onValueChange={v => updateMember(idx, "relation", v)}>
+                          <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                          <SelectContent>
+                            {["Head", "Spouse", "Child", "Parent", "Sibling", "Other"].map(r => (
+                              <SelectItem key={r} value={r}>{r}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div className="space-y-1.5">
                         <Label className="text-xs text-muted-foreground">Date of Birth</Label>
