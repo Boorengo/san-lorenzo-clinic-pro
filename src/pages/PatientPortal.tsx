@@ -83,7 +83,7 @@ export default function PatientPortal() {
   };
 
   const resetForm = () => {
-    setMembers([emptyMember(true)]);
+    setMembers([emptyMember()]);
   };
 
   const updateMember = (index: number, field: keyof HouseholdMember, value: any) => {
