@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
-      navigate("/");
+      navigate("/dashboard");
     }, 500);
   };
 

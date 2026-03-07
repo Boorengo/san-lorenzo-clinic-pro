@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StaffLayout from "./components/layout/StaffLayout";
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Patients from "./pages/Patients";
 import PatientProfile from "./pages/PatientProfile";
@@ -14,7 +15,12 @@ import Inventory from "./pages/Inventory";
 import Documents from "./pages/Documents";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import Verify from "./pages/Verify";
 import PatientPortal from "./pages/PatientPortal";
+import DataPrivacy from "./pages/DataPrivacy";
+import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,9 +32,15 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/verify" element={<Verify />} />
           <Route path="/patient-portal" element={<PatientPortal />} />
-          <Route path="/" element={<StaffLayout />}>
+          <Route path="/data-privacy" element={<DataPrivacy />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/dashboard" element={<StaffLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="patients" element={<Patients />} />
             <Route path="patients/:id" element={<PatientProfile />} />
