@@ -16,13 +16,13 @@ import {
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { title: "Dashboard", path: "/", icon: LayoutDashboard },
-  { title: "Patients", path: "/patients", icon: Users },
-  { title: "Forms & Reports", path: "/forms", icon: FileText },
-  { title: "Immunization", path: "/immunization", icon: Syringe },
-  { title: "Inventory", path: "/inventory", icon: Package },
-  { title: "Documents", path: "/documents", icon: FileOutput },
-  { title: "Settings", path: "/settings", icon: Settings },
+  { title: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+  { title: "Patients", path: "/dashboard/patients", icon: Users },
+  { title: "Forms & Reports", path: "/dashboard/forms", icon: FileText },
+  { title: "Immunization", path: "/dashboard/immunization", icon: Syringe },
+  { title: "Inventory", path: "/dashboard/inventory", icon: Package },
+  { title: "Documents", path: "/dashboard/documents", icon: FileOutput },
+  { title: "Settings", path: "/dashboard/settings", icon: Settings },
 ];
 
 export default function StaffLayout() {
