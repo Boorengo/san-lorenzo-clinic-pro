@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
-      navigate("/");
+      navigate("/dashboard");
     }, 500);
   };
 
@@ -43,14 +43,25 @@ export default function Login() {
             <LogIn className="h-4 w-4" />
             {loading ? "Signing in..." : "Sign In"}
           </Button>
+          <div className="text-center">
+            <button type="button" onClick={() => navigate("/forgot-password")} className="text-xs text-primary hover:underline">
+              Forgot password?
+            </button>
+          </div>
         </form>
 
-        <p className="text-center text-xs text-muted-foreground">
-          Are you a patient?{" "}
-          <button onClick={() => navigate("/patient-portal")} className="text-primary hover:underline font-medium">
-            View your records
-          </button>
-        </p>
+        <div className="text-center space-y-1">
+          <p className="text-xs text-muted-foreground">
+            Don't have an account?{" "}
+            <button onClick={() => navigate("/register")} className="text-primary hover:underline font-medium">Register</button>
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Are you a patient?{" "}
+            <button onClick={() => navigate("/patient-portal")} className="text-primary hover:underline font-medium">
+              Patient Portal
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );

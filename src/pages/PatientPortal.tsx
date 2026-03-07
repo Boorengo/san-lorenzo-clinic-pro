@@ -208,8 +208,8 @@ export default function PatientPortal() {
 
       {/* Modal */}
       <Dialog open={modalOpen} onOpenChange={(open) => { setModalOpen(open); if (!open) resetForm(); }}>
-        <DialogContent className="max-w-3xl max-h-[90vh] p-0">
-          <DialogHeader className="px-6 pt-6 pb-2">
+        <DialogContent className="max-w-3xl max-h-[90vh] p-0 flex flex-col overflow-hidden">
+          <DialogHeader className="px-6 pt-6 pb-2 shrink-0">
             <DialogTitle className="flex items-center gap-2">
               <Home className="h-5 w-5 text-primary" />
               Family Health Profile — Block {selectedBlock?.label}
@@ -220,7 +220,7 @@ export default function PatientPortal() {
           </DialogHeader>
 
           <form onSubmit={handleSubmit}>
-            <ScrollArea className="max-h-[calc(90vh-11rem)]">
+            <ScrollArea className="flex-1 overflow-y-auto" style={{ maxHeight: "calc(90vh - 12rem)" }}>
               <div className="px-6 pb-4 space-y-4">
                 {/* Block/Lot selector */}
                 <div className="grid grid-cols-2 gap-3">
