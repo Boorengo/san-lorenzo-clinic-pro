@@ -1,7 +1,5 @@
-const Index = () => {
-  // Redirect to login
-  window.location.href = "/login";
-  return null;
-};
+import { Navigate } from "react-router-dom";
+
+const Index = () => <Navigate to="/" replace />;
 
 export default Index;
