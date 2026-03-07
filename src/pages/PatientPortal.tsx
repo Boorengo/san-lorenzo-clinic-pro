@@ -208,8 +208,8 @@ export default function PatientPortal() {
 
       {/* Modal */}
       <Dialog open={modalOpen} onOpenChange={(open) => { setModalOpen(open); if (!open) resetForm(); }}>
-        <DialogContent className="max-w-3xl max-h-[90vh] p-0">
-          <DialogHeader className="px-6 pt-6 pb-2 shrink-0">
+        <DialogContent className="max-w-3xl max-h-[90vh] p-0 flex flex-col overflow-hidden">
+          <DialogHeader className="px-6 pt-6 pb-2 shrink-0 shrink-0">
             <DialogTitle className="flex items-center gap-2">
               <Home className="h-5 w-5 text-primary" />
               Family Health Profile — Block {selectedBlock?.label}
