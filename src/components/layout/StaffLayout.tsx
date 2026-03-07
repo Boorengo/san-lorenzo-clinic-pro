@@ -30,7 +30,7 @@ export default function StaffLayout() {
   const location = useLocation();
 
   const isActive = (path: string) =>
-    path === "/" ? location.pathname === "/" : location.pathname.startsWith(path);
+    path === "/dashboard" ? location.pathname === "/dashboard" : location.pathname.startsWith(path);
 
   return (
     <div className="flex min-h-screen w-full bg-background">
