@@ -33,7 +33,7 @@ export default function StaffLayout() {
     path === "/dashboard" ? location.pathname === "/dashboard" : location.pathname.startsWith(path);
 
   return (
-    <div className="flex min-h-screen w-full bg-background">
+    <div className="flex h-screen w-full bg-background overflow-hidden">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
