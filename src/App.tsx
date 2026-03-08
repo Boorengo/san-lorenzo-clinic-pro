@@ -39,6 +39,7 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/patient-portal" element={<PatientPortal />} />
+          <Route path="/my-profile" element={<UserProfile />} />
           <Route path="/data-privacy" element={<DataPrivacy />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/dashboard" element={<StaffLayout />}>
