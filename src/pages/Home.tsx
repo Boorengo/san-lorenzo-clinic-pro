@@ -103,7 +103,7 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden pt-16">
         {/* Background blobs */}
         <div className="hero-blob w-96 h-96 bg-primary/20 -top-20 -left-20" style={{ position: "absolute" }} />
         <div className="hero-blob w-80 h-80 bg-secondary/20 -bottom-10 -right-10" style={{ position: "absolute" }} />
