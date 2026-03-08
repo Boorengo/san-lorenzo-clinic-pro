@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Patients from "./pages/Patients";
 import PatientProfile from "./pages/PatientProfile";
+import UserProfile from "./pages/UserProfile";
 import FormsReports from "./pages/FormsReports";
 import FormFill from "./pages/FormFill";
 import Immunization from "./pages/Immunization";
