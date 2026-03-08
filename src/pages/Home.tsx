@@ -64,9 +64,6 @@ export default function Home() {
             <Button size="sm" variant="outline" className="text-xs gap-1.5" onClick={() => navigate("/register")}>
               <UserPlus className="h-3.5 w-3.5" /> Register
             </Button>
-            <Button size="sm" className="text-xs healthcare-gradient text-primary-foreground border-0 gap-1.5 shadow-md hover:shadow-lg transition-shadow" onClick={() => navigate("/patient-portal")}>
-              Patient Portal
-            </Button>
           </nav>
 
           {/* Mobile toggle */}
