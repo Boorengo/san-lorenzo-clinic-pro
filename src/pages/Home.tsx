@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { Users, Shield, Stethoscope, ChevronDown, ArrowRight, Phone, MapPin, Clock, LogIn, UserPlus, Activity, Baby, Pill, Menu, X } from "lucide-react";
+import { Users, Shield, Stethoscope, ChevronDown, ArrowRight, Phone, MapPin, Clock, LogIn, LogOut, UserPlus, Activity, Baby, Pill, Menu, X, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.jpg";
 
