@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Heart, LogIn, ArrowLeft, Stethoscope, Shield, Users, Eye, EyeOff } from "lucide-react";
+import { LogIn, ArrowLeft, Stethoscope, Shield, Users, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
+import logo from "@/assets/logo.jpg";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -27,8 +28,8 @@ export default function Login() {
         <div className="hero-blob w-80 h-80 bg-white/10 -bottom-10 -right-10" style={{ position: "absolute" }} />
         <div className="relative text-center space-y-8 max-w-md">
           <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-white/20 backdrop-blur shadow-lg">
-              <Heart className="h-10 w-10 text-primary-foreground" />
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-white/20 backdrop-blur shadow-lg overflow-hidden">
+              <img src={logo} alt="BHC San Lorenzo Ruiz 1 Logo" className="h-full w-full object-cover" />
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
@@ -60,9 +61,7 @@ export default function Login() {
               <ArrowLeft className="h-3.5 w-3.5" /> Back to Home
             </Button>
             <div className="lg:hidden flex items-center gap-2.5 mb-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl healthcare-gradient shadow-md">
-                <Heart className="h-5 w-5 text-primary-foreground" />
-              </div>
+              <img src={logo} alt="BHC San Lorenzo Ruiz 1 Logo" className="h-10 w-10 rounded-full object-cover shadow-md" />
               <div>
                 <span className="font-display text-sm font-bold text-foreground block">BHC San Lorenzo Ruiz 1</span>
                 <span className="text-[10px] text-muted-foreground">Health Center</span>
@@ -107,7 +106,7 @@ export default function Login() {
               Create a new account
             </Button>
             <Button variant="ghost" className="w-full text-xs h-10 gap-1.5 text-primary" onClick={() => navigate("/patient-portal")}>
-              <Heart className="h-3.5 w-3.5" /> Go to Patient Portal
+              Go to Patient Portal
             </Button>
           </div>
         </motion.div>

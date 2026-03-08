@@ -11,9 +11,9 @@ import {
   LogOut,
   Menu,
   X,
-  Heart,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo.jpg";
 
 const navItems = [
   { title: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
@@ -33,7 +33,7 @@ export default function StaffLayout() {
     path === "/dashboard" ? location.pathname === "/dashboard" : location.pathname.startsWith(path);
 
   return (
-    <div className="flex h-screen w-full bg-background overflow-hiddenrflow-hidden">
+    <div className="flex h-screen w-full bg-background overflow-hidden">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -51,9 +51,7 @@ export default function StaffLayout() {
       >
         {/* Logo */}
         <div className="flex items-center gap-3 border-b border-sidebar-border px-5 py-5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg healthcare-gradient">
-            <Heart className="h-5 w-5 text-primary-foreground" />
-          </div>
+          <img src={logo} alt="BHC San Lorenzo Ruiz 1 Logo" className="h-9 w-9 rounded-full object-cover" />
           <div>
             <h1 className="font-display text-sm font-bold leading-tight text-sidebar-foreground">
               BHC San Lorenzo
@@ -69,7 +67,7 @@ export default function StaffLayout() {
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 space-y-1 px-3 py-4">
+        <nav className="flex-1 space-y-1 px-3 py-4 overflow-y-auto">
           {navItems.map((item) => (
             <Link
               key={item.path}
@@ -102,7 +100,7 @@ export default function StaffLayout() {
 
       {/* Main content */}
       <div className="flex flex-1 flex-col min-w-0">
-        {/* Top bar */}
+        {/* Top bar - sticky */}
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-card px-4 lg:px-6">
           <button
             onClick={() => setSidebarOpen(true)}
@@ -118,8 +116,8 @@ export default function StaffLayout() {
           </div>
         </header>
 
-        {/* Page content */}
-        <main className="flex-1 p-4 lg:p-6 ani overflow-y-automate-fade-in">
+        {/* Page content - scrollable */}
+        <main className="flex-1 overflow-y-auto p-4 lg:p-6">
           <Outlet />
         </main>
       </div>
