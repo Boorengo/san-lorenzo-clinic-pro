@@ -89,9 +89,6 @@ export default function Home() {
                   <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/login")}><LogIn className="h-3.5 w-3.5" /> Login</Button>
                   <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/register")}><UserPlus className="h-3.5 w-3.5" /> Register</Button>
                 </div>
-                <Button className="w-full text-xs healthcare-gradient text-primary-foreground border-0 gap-1.5" onClick={() => navigate("/patient-portal")}>
-                  Patient Portal
-                </Button>
               </div>
             </motion.div>
           )}
