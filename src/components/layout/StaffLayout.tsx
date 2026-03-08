@@ -33,7 +33,7 @@ export default function StaffLayout() {
     path === "/dashboard" ? location.pathname === "/dashboard" : location.pathname.startsWith(path);
 
   return (
-    <div className="flex h-screen w-full bg-background overflow-hidden">
+    <div className="flex h-screen w-full bg-background overflow-hiddenrflow-hidden">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -119,7 +119,7 @@ export default function StaffLayout() {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-4 lg:p-6 animate-fade-in">
+        <main className="flex-1 p-4 lg:p-6 ani overflow-y-automate-fade-in">
           <Outlet />
         </main>
       </div>
