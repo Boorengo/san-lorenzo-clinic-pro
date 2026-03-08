@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Heart, UserPlus, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { Heart, UserPlus, ArrowLeft, CheckCircle2, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,6 +16,8 @@ const benefits = [
 export default function Register() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,11 +89,21 @@ export default function Register() {
             </div>
             <div className="space-y-1.5">
               <Label className="text-xs font-medium">Password</Label>
-              <Input type="password" placeholder="Create a password" required className="h-11" />
+              <div className="relative">
+                <Input type={showPassword ? "text" : "password"} placeholder="Create a password" required className="h-11 pr-10" />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
             <div className="space-y-1.5">
               <Label className="text-xs font-medium">Confirm Password</Label>
-              <Input type="password" placeholder="Confirm password" required className="h-11" />
+              <div className="relative">
+                <Input type={showConfirm ? "text" : "password"} placeholder="Confirm password" required className="h-11 pr-10" />
+                <button type="button" onClick={() => setShowConfirm(!showConfirm)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                  {showConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
             <div className="flex items-start gap-2.5 pt-1">
               <input type="checkbox" required className="mt-1 accent-primary h-4 w-4 rounded" />

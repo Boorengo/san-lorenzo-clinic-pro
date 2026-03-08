@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Heart, LogIn, ArrowLeft, Stethoscope, Shield, Users } from "lucide-react";
+import { Heart, LogIn, ArrowLeft, Stethoscope, Shield, Users, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 export default function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,7 +84,12 @@ export default function Login() {
                   Forgot password?
                 </button>
               </div>
-              <Input type="password" placeholder="Enter password" required className="h-11" />
+              <div className="relative">
+                <Input type={showPassword ? "text" : "password"} placeholder="Enter password" required className="h-11 pr-10" />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
             <Button type="submit" className="w-full h-11 healthcare-gradient text-primary-foreground border-0 gap-2 shadow-md hover:shadow-lg transition-shadow" disabled={loading}>
               <LogIn className="h-4 w-4" />
