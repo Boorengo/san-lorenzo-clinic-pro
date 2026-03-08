@@ -18,6 +18,7 @@ export default function Login() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    localStorage.setItem("isLoggedIn", "true");
     setTimeout(() => {
       if (role === "staff") {
         navigate("/dashboard");

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { Users, Shield, Stethoscope, ChevronDown, ArrowRight, Phone, MapPin, Clock, LogIn, UserPlus, Activity, Baby, Pill, Menu, X } from "lucide-react";
+import { Users, Shield, Stethoscope, ChevronDown, ArrowRight, Phone, MapPin, Clock, LogIn, LogOut, UserPlus, Activity, Baby, Pill, Menu, X, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.jpg";
 
@@ -38,6 +38,16 @@ export default function Home() {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -58,12 +68,28 @@ export default function Home() {
             <a href="#services" className="px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted">Services</a>
             <a href="#faqs" className="px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted">FAQs</a>
             <div className="w-px h-6 bg-border mx-2" />
-            <Button size="sm" variant="ghost" className="text-xs gap-1.5" onClick={() => navigate("/login")}>
-              <LogIn className="h-3.5 w-3.5" /> Login
-            </Button>
-            <Button size="sm" variant="outline" className="text-xs gap-1.5" onClick={() => navigate("/register")}>
-              <UserPlus className="h-3.5 w-3.5" /> Register
-            </Button>
+            {isLoggedIn ? (
+              <>
+                <Button size="sm" variant="ghost" className="text-xs gap-1.5" onClick={() => navigate("/patient-portal")}>
+                  <ArrowRight className="h-3.5 w-3.5" /> Patient Portal
+                </Button>
+                <Button size="sm" variant="ghost" className="text-xs gap-1.5" onClick={() => navigate("/my-profile")}>
+                  <User className="h-3.5 w-3.5" /> Profile
+                </Button>
+                <Button size="sm" variant="outline" className="text-xs gap-1.5 text-destructive border-destructive/30 hover:bg-destructive/10" onClick={handleLogout}>
+                  <LogOut className="h-3.5 w-3.5" /> Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button size="sm" variant="ghost" className="text-xs gap-1.5" onClick={() => navigate("/login")}>
+                  <LogIn className="h-3.5 w-3.5" /> Login
+                </Button>
+                <Button size="sm" variant="outline" className="text-xs gap-1.5" onClick={() => navigate("/register")}>
+                  <UserPlus className="h-3.5 w-3.5" /> Register
+                </Button>
+              </>
+            )}
           </nav>
 
           {/* Mobile toggle */}
@@ -86,8 +112,18 @@ export default function Home() {
                 <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">Services</a>
                 <a href="#faqs" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">FAQs</a>
                 <div className="border-t pt-3 mt-2 grid grid-cols-2 gap-2">
-                  <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/login")}><LogIn className="h-3.5 w-3.5" /> Login</Button>
-                  <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/register")}><UserPlus className="h-3.5 w-3.5" /> Register</Button>
+                  {isLoggedIn ? (
+                    <>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => { navigate("/patient-portal"); setMobileMenuOpen(false); }}><ArrowRight className="h-3.5 w-3.5" /> Patient Portal</Button>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => { navigate("/my-profile"); setMobileMenuOpen(false); }}><User className="h-3.5 w-3.5" /> Profile</Button>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full col-span-2 text-destructive border-destructive/30" onClick={() => { handleLogout(); setMobileMenuOpen(false); }}><LogOut className="h-3.5 w-3.5" /> Logout</Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/login")}><LogIn className="h-3.5 w-3.5" /> Login</Button>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/register")}><UserPlus className="h-3.5 w-3.5" /> Register</Button>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -136,12 +172,15 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="mt-8 flex flex-col sm:flex-row gap-3"
             >
-              <Button size="lg" className="healthcare-gradient text-primary-foreground border-0 gap-2 shadow-lg hover:shadow-xl transition-shadow text-sm px-6" onClick={() => navigate("/patient-portal")}>
-                Open Patient Portal <ArrowRight className="h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="gap-2 text-sm px-6 bg-card/50 backdrop-blur" onClick={() => navigate("/register")}>
-                <UserPlus className="h-4 w-4" /> Create Account
-              </Button>
+              {isLoggedIn ? (
+                <Button size="lg" className="healthcare-gradient text-primary-foreground border-0 gap-2 shadow-lg hover:shadow-xl transition-shadow text-sm px-6" onClick={() => navigate("/patient-portal")}>
+                  Open Patient Portal <ArrowRight className="h-4 w-4" />
+                </Button>
+              ) : (
+                <Button size="lg" className="healthcare-gradient text-primary-foreground border-0 gap-2 shadow-lg hover:shadow-xl transition-shadow text-sm px-6" onClick={() => navigate("/register")}>
+                  <UserPlus className="h-4 w-4" /> Create Account
+                </Button>
+              )}
             </motion.div>
           </div>
         </div>
@@ -310,12 +349,20 @@ export default function Home() {
                 I-click lang ang Patient Portal para simulan ang inyong family health profile.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Button size="lg" className="bg-white text-foreground hover:bg-white/90 gap-2 shadow-lg text-sm px-6 border-0" onClick={() => navigate("/patient-portal")}>
-                  Open Patient Portal
-                </Button>
-                <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-white/10 gap-2 text-sm px-6" onClick={() => navigate("/register")}>
-                  <UserPlus className="h-4 w-4" /> Register Account
-                </Button>
+                {isLoggedIn ? (
+                  <Button size="lg" className="bg-white text-foreground hover:bg-white/90 gap-2 shadow-lg text-sm px-6 border-0" onClick={() => navigate("/patient-portal")}>
+                    Open Patient Portal
+                  </Button>
+                ) : (
+                  <>
+                    <Button size="lg" className="bg-white text-foreground hover:bg-white/90 gap-2 shadow-lg text-sm px-6 border-0" onClick={() => navigate("/register")}>
+                      <UserPlus className="h-4 w-4" /> Register Account
+                    </Button>
+                    <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2 text-sm px-6" onClick={() => navigate("/login")}>
+                      <LogIn className="h-4 w-4" /> Login
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
