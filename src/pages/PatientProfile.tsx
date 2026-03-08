@@ -27,7 +27,7 @@ export default function PatientProfile() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <Link to="/patients">
+        <Link to="/dashboard/patients">
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
             <ArrowLeft className="h-4 w-4" />
           </Button>

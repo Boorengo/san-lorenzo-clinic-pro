@@ -44,7 +44,7 @@ export default function FormsReports() {
         {templates.map((t) => (
           <Link
             key={t.id}
-            to={`/forms/${t.id}`}
+            to={`/dashboard/forms/${t.id}`}
             className="group rounded-xl border bg-card p-5 card-hover block"
           >
             <div className="flex items-start gap-3">

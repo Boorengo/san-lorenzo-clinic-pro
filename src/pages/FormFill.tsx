@@ -82,7 +82,7 @@ export default function FormFill() {
   return (
     <div className="space-y-6 p-1">
       <div className="flex items-center gap-3">
-        <Link to="/forms">
+        <Link to="/dashboard/forms">
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
             <ArrowLeft className="h-4 w-4" />
           </Button>

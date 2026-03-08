@@ -71,12 +71,12 @@ export default function Patients() {
                   <td className="px-4 py-3 text-muted-foreground hidden sm:table-cell">{p.lastVisit}</td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex items-center justify-end gap-1">
-                      <Link to={`/patients/${p.id}`}>
+                      <Link to={`/dashboard/patients/${p.id}`}>
                         <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                           <Eye className="h-4 w-4" />
                         </Button>
                       </Link>
-                      <Link to={`/patients/${p.id}`}>
+                      <Link to={`/dashboard/patients/${p.id}`}>
                         <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                           <Edit className="h-4 w-4" />
                         </Button>
