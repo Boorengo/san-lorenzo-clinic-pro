@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { Heart, Users, Shield, Stethoscope, ChevronDown, ChevronUp, ArrowRight, Phone, MapPin, Clock, LogIn, UserPlus, Activity, Baby, Pill, Menu, X } from "lucide-react";
+import { Users, Shield, Stethoscope, ChevronDown, ArrowRight, Phone, MapPin, Clock, LogIn, UserPlus, Activity, Baby, Pill, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assets/logo.jpg";
 
 const faqs = [
   { q: "Ano ang mga serbisyo ng health center?", a: "Nagbibigay kami ng prenatal care, immunization, family planning, konsultasyon, TB-DOTS, at iba pang primary health care services." },
@@ -44,9 +45,7 @@ export default function Home() {
       <header className="fixed top-0 left-0 right-0 z-50 border-b glass">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 group">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl healthcare-gradient shadow-md group-hover:shadow-lg transition-shadow">
-              <Heart className="h-5 w-5 text-primary-foreground" />
-            </div>
+            <img src={logo} alt="BHC San Lorenzo Ruiz 1 Logo" className="h-10 w-10 rounded-full object-cover shadow-md group-hover:shadow-lg transition-shadow" />
             <div className="hidden sm:block">
               <span className="font-display text-sm font-bold text-foreground block leading-tight">BHC San Lorenzo Ruiz 1</span>
               <span className="text-[10px] text-muted-foreground leading-tight">Health Center</span>
@@ -66,7 +65,7 @@ export default function Home() {
               <UserPlus className="h-3.5 w-3.5" /> Register
             </Button>
             <Button size="sm" className="text-xs healthcare-gradient text-primary-foreground border-0 gap-1.5 shadow-md hover:shadow-lg transition-shadow" onClick={() => navigate("/patient-portal")}>
-              <Heart className="h-3.5 w-3.5" /> Patient Portal
+              Patient Portal
             </Button>
           </nav>
 
@@ -94,7 +93,7 @@ export default function Home() {
                   <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/register")}><UserPlus className="h-3.5 w-3.5" /> Register</Button>
                 </div>
                 <Button className="w-full text-xs healthcare-gradient text-primary-foreground border-0 gap-1.5" onClick={() => navigate("/patient-portal")}>
-                  <Heart className="h-3.5 w-3.5" /> Patient Portal
+                  Patient Portal
                 </Button>
               </div>
             </motion.div>
@@ -318,7 +317,7 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Button size="lg" className="bg-white text-foreground hover:bg-white/90 gap-2 shadow-lg text-sm px-6 border-0" onClick={() => navigate("/patient-portal")}>
-                  <Heart className="h-4 w-4 text-primary" /> Open Patient Portal
+                  Open Patient Portal
                 </Button>
                 <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-white/10 gap-2 text-sm px-6" onClick={() => navigate("/register")}>
                   <UserPlus className="h-4 w-4" /> Register Account
@@ -334,9 +333,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4 py-10">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg healthcare-gradient">
-                <Heart className="h-4 w-4 text-primary-foreground" />
-              </div>
+              <img src={logo} alt="BHC San Lorenzo Ruiz 1 Logo" className="h-8 w-8 rounded-full object-cover" />
               <span className="font-display text-xs font-bold text-foreground">BHC San Lorenzo Ruiz 1</span>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">

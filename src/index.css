@@ -15,87 +15,87 @@
     --popover: 0 0% 100%;
     --popover-foreground: 210 20% 14%;
 
-    --primary: 152 55% 42%;
+    --primary: 160 45% 28%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 65% 48%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 45 95% 50%;
+    --secondary-foreground: 210 20% 14%;
 
-    --muted: 150 15% 95%;
+    --muted: 160 12% 95%;
     --muted-foreground: 210 10% 46%;
 
-    --accent: 152 30% 92%;
-    --accent-foreground: 152 55% 28%;
+    --accent: 160 25% 90%;
+    --accent-foreground: 160 45% 22%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 210 15% 90%;
     --input: 210 15% 90%;
-    --ring: 152 55% 42%;
+    --ring: 160 45% 28%;
 
     --radius: 0.625rem;
 
-    --sidebar-background: 152 30% 16%;
-    --sidebar-foreground: 150 15% 90%;
-    --sidebar-primary: 152 55% 52%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 152 25% 22%;
-    --sidebar-accent-foreground: 150 15% 90%;
-    --sidebar-border: 152 20% 24%;
-    --sidebar-ring: 152 55% 42%;
+    --sidebar-background: 160 35% 14%;
+    --sidebar-foreground: 160 12% 92%;
+    --sidebar-primary: 45 95% 50%;
+    --sidebar-primary-foreground: 210 20% 14%;
+    --sidebar-accent: 160 30% 20%;
+    --sidebar-accent-foreground: 160 12% 92%;
+    --sidebar-border: 160 25% 22%;
+    --sidebar-ring: 160 45% 28%;
 
     /* Custom healthcare tokens */
-    --success: 152 55% 42%;
+    --success: 160 45% 28%;
     --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
+    --warning: 45 95% 50%;
+    --warning-foreground: 210 20% 14%;
     --info: 200 65% 48%;
     --info-foreground: 0 0% 100%;
 
-    --chart-green: 152 55% 42%;
+    --chart-green: 160 45% 28%;
     --chart-blue: 200 65% 48%;
-    --chart-amber: 38 92% 50%;
+    --chart-amber: 45 95% 50%;
     --chart-red: 0 72% 51%;
 
     /* Enhanced tokens */
-    --primary-glow: 152 60% 50%;
-    --hero-gradient-start: 152 55% 96%;
-    --hero-gradient-end: 200 65% 96%;
+    --primary-glow: 160 50% 36%;
+    --hero-gradient-start: 160 40% 95%;
+    --hero-gradient-end: 45 60% 95%;
   }
 
   .dark {
     --background: 210 20% 8%;
-    --foreground: 150 15% 90%;
+    --foreground: 160 12% 92%;
     --card: 210 20% 11%;
-    --card-foreground: 150 15% 90%;
+    --card-foreground: 160 12% 92%;
     --popover: 210 20% 11%;
-    --popover-foreground: 150 15% 90%;
-    --primary: 152 55% 42%;
+    --popover-foreground: 160 12% 92%;
+    --primary: 160 45% 28%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 200 65% 48%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 45 95% 50%;
+    --secondary-foreground: 210 20% 14%;
     --muted: 210 15% 18%;
     --muted-foreground: 210 10% 60%;
-    --accent: 152 25% 22%;
-    --accent-foreground: 152 55% 70%;
+    --accent: 160 25% 20%;
+    --accent-foreground: 160 45% 65%;
     --destructive: 0 62% 30.6%;
     --destructive-foreground: 0 0% 100%;
     --border: 210 15% 20%;
     --input: 210 15% 20%;
-    --ring: 152 55% 42%;
-    --sidebar-background: 152 30% 10%;
-    --sidebar-foreground: 150 15% 85%;
-    --sidebar-primary: 152 55% 52%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 152 25% 16%;
-    --sidebar-accent-foreground: 150 15% 85%;
-    --sidebar-border: 152 20% 18%;
-    --sidebar-ring: 152 55% 42%;
+    --ring: 160 45% 28%;
+    --sidebar-background: 160 35% 8%;
+    --sidebar-foreground: 160 12% 85%;
+    --sidebar-primary: 45 95% 50%;
+    --sidebar-primary-foreground: 210 20% 14%;
+    --sidebar-accent: 160 30% 14%;
+    --sidebar-accent-foreground: 160 12% 85%;
+    --sidebar-border: 160 25% 16%;
+    --sidebar-ring: 160 45% 28%;
 
-    --primary-glow: 152 60% 55%;
-    --hero-gradient-start: 152 30% 12%;
-    --hero-gradient-end: 200 30% 12%;
+    --primary-glow: 160 50% 40%;
+    --hero-gradient-start: 160 30% 12%;
+    --hero-gradient-end: 45 30% 12%;
   }
 }
 
@@ -115,7 +115,7 @@
 
 @layer utilities {
   .healthcare-gradient {
-    background: linear-gradient(135deg, hsl(152 55% 42%), hsl(200 65% 48%));
+    background: linear-gradient(135deg, hsl(160 45% 28%), hsl(160 35% 14%));
   }
 
   .healthcare-gradient-soft {
@@ -132,7 +132,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, hsl(152 55% 42%), hsl(200 65% 48%));
+    background: linear-gradient(135deg, hsl(160 45% 28%), hsl(45 95% 50%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
