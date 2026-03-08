@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Heart, Syringe, FileText, LogOut, Settings, ArrowRight } from "lucide-react";
+import { User, Heart, Syringe, FileText, LogOut, Settings, ArrowRight, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -47,6 +47,9 @@ export default function UserProfile() {
             <h1 className="font-display text-sm font-bold text-foreground">My Health Profile</h1>
             <p className="text-[10px] text-muted-foreground">BHC San Lorenzo Ruiz 1</p>
           </div>
+          <Button variant="ghost" size="sm" className="text-xs gap-1.5" onClick={() => navigate("/")}>
+            <Home className="h-3.5 w-3.5" /> Home
+          </Button>
           <Button variant="outline" size="sm" className="text-xs gap-1.5" onClick={() => navigate("/patient-portal")}>
             <Heart className="h-3.5 w-3.5" /> Patient Portal
           </Button>

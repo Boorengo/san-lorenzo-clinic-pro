@@ -147,9 +147,9 @@ export default function PatientPortal() {
             <h1 className="font-display text-sm font-bold">Patient Portal</h1>
             <p className="text-xs text-muted-foreground">San Lorenzo Ruiz 1 Health Center</p>
           </div>
-          <Button variant="ghost" size="sm" onClick={() => navigate("/login")} className="gap-1.5 text-xs">
-            <ArrowLeft className="h-3.5 w-3.5" />
-            Login
+          <Button variant="ghost" size="sm" onClick={() => navigate("/my-profile")} className="gap-1.5 text-xs">
+            <User className="h-3.5 w-3.5" />
+            My Profile
           </Button>
         </div>
       </header>
