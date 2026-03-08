@@ -39,9 +39,9 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen bg-background">
       {/* Navbar */}
-      <header className="sticky top-0 z-50 border-b glass">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b glass">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 group">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl healthcare-gradient shadow-md group-hover:shadow-lg transition-shadow">
@@ -103,7 +103,7 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden pt-16">
         {/* Background blobs */}
         <div className="hero-blob w-96 h-96 bg-primary/20 -top-20 -left-20" style={{ position: "absolute" }} />
         <div className="hero-blob w-80 h-80 bg-secondary/20 -bottom-10 -right-10" style={{ position: "absolute" }} />
