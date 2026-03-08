@@ -112,8 +112,18 @@ export default function Home() {
                 <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">Services</a>
                 <a href="#faqs" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">FAQs</a>
                 <div className="border-t pt-3 mt-2 grid grid-cols-2 gap-2">
-                  <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/login")}><LogIn className="h-3.5 w-3.5" /> Login</Button>
-                  <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/register")}><UserPlus className="h-3.5 w-3.5" /> Register</Button>
+                  {isLoggedIn ? (
+                    <>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => { navigate("/patient-portal"); setMobileMenuOpen(false); }}><ArrowRight className="h-3.5 w-3.5" /> Patient Portal</Button>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => { navigate("/my-profile"); setMobileMenuOpen(false); }}><User className="h-3.5 w-3.5" /> Profile</Button>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full col-span-2 text-destructive border-destructive/30" onClick={() => { handleLogout(); setMobileMenuOpen(false); }}><LogOut className="h-3.5 w-3.5" /> Logout</Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/login")}><LogIn className="h-3.5 w-3.5" /> Login</Button>
+                      <Button variant="outline" className="text-xs gap-1.5 w-full" onClick={() => navigate("/register")}><UserPlus className="h-3.5 w-3.5" /> Register</Button>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>
