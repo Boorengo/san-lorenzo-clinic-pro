@@ -1,22 +1,29 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LogIn, ArrowLeft, Stethoscope, Shield, Users, Eye, EyeOff } from "lucide-react";
+import { LogIn, ArrowLeft, Stethoscope, Shield, Users, Eye, EyeOff, User, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.jpg";
 
+type LoginRole = "user" | "staff";
+
 export default function Login() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [role, setRole] = useState<LoginRole>("user");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
-      navigate("/dashboard");
+      if (role === "staff") {
+        navigate("/dashboard");
+      } else {
+        navigate("/my-profile");
+      }
     }, 500);
   };
 
@@ -68,13 +75,41 @@ export default function Login() {
               </div>
             </div>
             <h2 className="font-display text-2xl font-bold text-foreground">Welcome back</h2>
-            <p className="text-sm text-muted-foreground mt-1">Sign in to the staff dashboard</p>
+            <p className="text-sm text-muted-foreground mt-1">Sign in to your account</p>
+          </div>
+
+          {/* Role selector */}
+          <div className="flex rounded-lg border bg-muted/50 p-1 gap-1">
+            <button
+              type="button"
+              onClick={() => setRole("user")}
+              className={`flex-1 flex items-center justify-center gap-2 rounded-md px-3 py-2.5 text-xs font-medium transition-all ${
+                role === "user"
+                  ? "bg-card shadow-sm text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <User className="h-3.5 w-3.5" />
+              User
+            </button>
+            <button
+              type="button"
+              onClick={() => setRole("staff")}
+              className={`flex-1 flex items-center justify-center gap-2 rounded-md px-3 py-2.5 text-xs font-medium transition-all ${
+                role === "staff"
+                  ? "bg-card shadow-sm text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Building2 className="h-3.5 w-3.5" />
+              Staff
+            </button>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-1.5">
-              <Label className="text-xs font-medium">Username</Label>
-              <Input placeholder="Enter username" required className="h-11" />
+              <Label className="text-xs font-medium">{role === "staff" ? "Username" : "Email"}</Label>
+              <Input placeholder={role === "staff" ? "Enter username" : "Enter email"} required className="h-11" />
             </div>
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
@@ -92,7 +127,7 @@ export default function Login() {
             </div>
             <Button type="submit" className="w-full h-11 healthcare-gradient text-primary-foreground border-0 gap-2 shadow-md hover:shadow-lg transition-shadow" disabled={loading}>
               <LogIn className="h-4 w-4" />
-              {loading ? "Signing in..." : "Sign In"}
+              {loading ? "Signing in..." : `Sign In as ${role === "staff" ? "Staff" : "User"}`}
             </Button>
           </form>
 
@@ -104,9 +139,6 @@ export default function Login() {
           <div className="space-y-2">
             <Button variant="outline" className="w-full text-xs h-10 gap-1.5" onClick={() => navigate("/register")}>
               Create a new account
-            </Button>
-            <Button variant="ghost" className="w-full text-xs h-10 gap-1.5 text-primary" onClick={() => navigate("/patient-portal")}>
-              Go to Patient Portal
             </Button>
           </div>
         </motion.div>

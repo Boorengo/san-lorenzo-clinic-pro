@@ -149,7 +149,7 @@ export default function PatientPortal() {
           </div>
           <Button variant="ghost" size="sm" onClick={() => navigate("/login")} className="gap-1.5 text-xs">
             <ArrowLeft className="h-3.5 w-3.5" />
-            Staff Login
+            Login
           </Button>
         </div>
       </header>

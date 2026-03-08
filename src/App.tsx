@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Patients from "./pages/Patients";
 import PatientProfile from "./pages/PatientProfile";
+import UserProfile from "./pages/UserProfile";
 import FormsReports from "./pages/FormsReports";
 import FormFill from "./pages/FormFill";
 import Immunization from "./pages/Immunization";
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/patient-portal" element={<PatientPortal />} />
+          <Route path="/my-profile" element={<UserProfile />} />
           <Route path="/data-privacy" element={<DataPrivacy />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/dashboard" element={<StaffLayout />}>
