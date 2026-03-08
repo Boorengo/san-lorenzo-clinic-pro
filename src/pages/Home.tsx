@@ -349,12 +349,20 @@ export default function Home() {
                 I-click lang ang Patient Portal para simulan ang inyong family health profile.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Button size="lg" className="bg-white text-foreground hover:bg-white/90 gap-2 shadow-lg text-sm px-6 border-0" onClick={() => navigate("/patient-portal")}>
-                  Open Patient Portal
-                </Button>
-                <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-white/10 gap-2 text-sm px-6" onClick={() => navigate("/register")}>
-                  <UserPlus className="h-4 w-4" /> Register Account
-                </Button>
+                {isLoggedIn ? (
+                  <Button size="lg" className="bg-white text-foreground hover:bg-white/90 gap-2 shadow-lg text-sm px-6 border-0" onClick={() => navigate("/patient-portal")}>
+                    Open Patient Portal
+                  </Button>
+                ) : (
+                  <>
+                    <Button size="lg" className="bg-white text-foreground hover:bg-white/90 gap-2 shadow-lg text-sm px-6 border-0" onClick={() => navigate("/register")}>
+                      <UserPlus className="h-4 w-4" /> Register Account
+                    </Button>
+                    <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2 text-sm px-6" onClick={() => navigate("/login")}>
+                      <LogIn className="h-4 w-4" /> Login
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
