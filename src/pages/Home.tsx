@@ -59,7 +59,7 @@ export default function Home() {
             <a href="#faqs" className="px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted">FAQs</a>
             <div className="w-px h-6 bg-border mx-2" />
             <Button size="sm" variant="ghost" className="text-xs gap-1.5" onClick={() => navigate("/login")}>
-              <LogIn className="h-3.5 w-3.5" /> Staff Login
+              <LogIn className="h-3.5 w-3.5" /> Login
             </Button>
             <Button size="sm" variant="outline" className="text-xs gap-1.5" onClick={() => navigate("/register")}>
               <UserPlus className="h-3.5 w-3.5" /> Register
