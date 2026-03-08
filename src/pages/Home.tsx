@@ -172,12 +172,15 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="mt-8 flex flex-col sm:flex-row gap-3"
             >
-              <Button size="lg" className="healthcare-gradient text-primary-foreground border-0 gap-2 shadow-lg hover:shadow-xl transition-shadow text-sm px-6" onClick={() => navigate("/patient-portal")}>
-                Open Patient Portal <ArrowRight className="h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="gap-2 text-sm px-6 bg-card/50 backdrop-blur" onClick={() => navigate("/register")}>
-                <UserPlus className="h-4 w-4" /> Create Account
-              </Button>
+              {isLoggedIn ? (
+                <Button size="lg" className="healthcare-gradient text-primary-foreground border-0 gap-2 shadow-lg hover:shadow-xl transition-shadow text-sm px-6" onClick={() => navigate("/patient-portal")}>
+                  Open Patient Portal <ArrowRight className="h-4 w-4" />
+                </Button>
+              ) : (
+                <Button size="lg" className="healthcare-gradient text-primary-foreground border-0 gap-2 shadow-lg hover:shadow-xl transition-shadow text-sm px-6" onClick={() => navigate("/register")}>
+                  <UserPlus className="h-4 w-4" /> Create Account
+                </Button>
+              )}
             </motion.div>
           </div>
         </div>
