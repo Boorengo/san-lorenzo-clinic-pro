@@ -165,6 +165,23 @@ const nutritionColumns: ColumnDef[] = [
   { key: "feeding", label: "Feeding Program", type: "checkbox" },
 ];
 
+// ── Vaccine Report Columns ──
+const vaccineReportColumns: ColumnDef[] = [
+  { key: "date", label: "Date", type: "date" },
+  { key: "vaccineName", label: "Vaccine Name", type: "text" },
+  { key: "lotNumber", label: "Lot Number", type: "text", width: "120px" },
+  { key: "expirationDate", label: "Expiration Date", type: "date" },
+  { key: "vialsPrevMonth", label: "No. of Vials from Prev. Month (F)", type: "number", width: "160px" },
+  { key: "dosesPrevMonth", label: "No. of Doses from Prev. Month (G)", type: "number", width: "160px" },
+  { key: "dosesReceived", label: "No. of Doses Received (H)", type: "number", width: "160px" },
+  { key: "dosesDistributed", label: "No. of Doses Distributed to Other BHIs", type: "number", width: "180px" },
+  { key: "totalRemaining", label: "Total Remaining Doses (F+G)-H", type: "number", width: "180px" },
+  { key: "vialsUsed", label: "No. of Vials Used (I)", type: "number", width: "140px" },
+  { key: "dosesUsed", label: "No. of Doses Used (J)", type: "number", width: "140px" },
+  { key: "wastage", label: "Wastage (K)", type: "number", width: "120px" },
+  { key: "remainingDoses", label: "Remaining Doses I-(J+K)", type: "number", width: "160px" },
+];
+
 // ── FHSIS Monthly Columns ──
 const fhsisColumns: ColumnDef[] = [
   { key: "indicator", label: "Health Indicator", type: "text" },
