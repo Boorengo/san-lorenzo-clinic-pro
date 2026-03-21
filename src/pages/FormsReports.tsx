@@ -315,6 +315,7 @@ export default function FormsReports() {
           <TabsTrigger value="family-health" className="text-xs sm:text-sm">Family Health</TabsTrigger>
           <TabsTrigger value="tcl" className="text-xs sm:text-sm">Target Client List</TabsTrigger>
           <TabsTrigger value="nutrition" className="text-xs sm:text-sm">Nutrition Report</TabsTrigger>
+          <TabsTrigger value="vaccine" className="text-xs sm:text-sm">Vaccine Report</TabsTrigger>
           <TabsTrigger value="fhsis" className="text-xs sm:text-sm">FHSIS Monthly</TabsTrigger>
         </TabsList>
 
