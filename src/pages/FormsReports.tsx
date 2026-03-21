@@ -300,6 +300,7 @@ function TCLContent() {
 export default function FormsReports() {
   const [familyData, setFamilyData] = useState<Record<string, any>[]>([]);
   const [nutritionData, setNutritionData] = useState<Record<string, any>[]>([]);
+  const [vaccineData, setVaccineData] = useState<Record<string, any>[]>([]);
   const [fhsisData, setFhsisData] = useState<Record<string, any>[]>(fhsisDefaultData);
 
   return (
