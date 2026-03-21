@@ -330,6 +330,7 @@ export default function FormsReports() {
       <Tabs defaultValue="family-health" className="space-y-6">
         <TabsList className="flex flex-wrap h-auto gap-1 bg-muted p-1.5 rounded-lg">
           <TabsTrigger value="family-health" className="text-xs sm:text-sm">Family Health</TabsTrigger>
+          <TabsTrigger value="prenatal" className="text-xs sm:text-sm">Prenatal</TabsTrigger>
           <TabsTrigger value="tcl" className="text-xs sm:text-sm">Target Client List</TabsTrigger>
           <TabsTrigger value="nutrition" className="text-xs sm:text-sm">Nutrition Report</TabsTrigger>
           <TabsTrigger value="vaccine" className="text-xs sm:text-sm">Vaccine Report</TabsTrigger>
