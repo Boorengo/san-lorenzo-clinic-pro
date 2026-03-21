@@ -182,6 +182,22 @@ const vaccineReportColumns: ColumnDef[] = [
   { key: "remainingDoses", label: "Remaining Doses I-(J+K)", type: "number", width: "160px" },
 ];
 
+// ── Prenatal Columns ──
+const prenatalColumns: ColumnDef[] = [
+  { key: "date", label: "Date", type: "date" },
+  { key: "infantName", label: "Name of Infant", type: "text" },
+  { key: "bp", label: "BP", type: "text", width: "100px" },
+  { key: "weight", label: "Weight (kg)", type: "number", width: "100px" },
+  { key: "height", label: "Height (cm)", type: "number", width: "100px" },
+  { key: "obHistory", label: "OB History", type: "text" },
+  { key: "lmp", label: "LMP", type: "date" },
+  { key: "aog", label: "AOG (weeks)", type: "number", width: "100px" },
+  { key: "fetalHeart", label: "Fetal Heart", type: "text", width: "110px" },
+  { key: "presentation", label: "Presentation", type: "select", options: ["Cephalic", "Breech", "Transverse", "Oblique"] },
+  { key: "assessment", label: "Assessment", type: "text" },
+  { key: "plan", label: "Plan", type: "text" },
+];
+
 // ── FHSIS Monthly Columns ──
 const fhsisColumns: ColumnDef[] = [
   { key: "indicator", label: "Health Indicator", type: "text" },
