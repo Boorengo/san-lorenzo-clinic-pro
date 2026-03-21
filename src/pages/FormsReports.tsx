@@ -338,6 +338,13 @@ export default function FormsReports() {
           <FormActions />
         </TabsContent>
 
+        {/* Vaccine Report */}
+        <TabsContent value="vaccine" className="space-y-4">
+          <FormHeader title="Vaccine Report" description="Monthly vaccine inventory and distribution tracking" />
+          <DynamicTable columns={vaccineReportColumns} data={vaccineData} onChange={setVaccineData} />
+          <FormActions />
+        </TabsContent>
+
         {/* FHSIS */}
         <TabsContent value="fhsis" className="space-y-4">
           <FormHeader title="FHSIS Monthly Report" description="Field Health Service Information System monthly summary" />
