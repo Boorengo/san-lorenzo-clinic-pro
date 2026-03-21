@@ -182,6 +182,22 @@ const vaccineReportColumns: ColumnDef[] = [
   { key: "remainingDoses", label: "Remaining Doses I-(J+K)", type: "number", width: "160px" },
 ];
 
+// ── Prenatal Columns ──
+const prenatalColumns: ColumnDef[] = [
+  { key: "date", label: "Date", type: "date" },
+  { key: "infantName", label: "Name of Infant", type: "text" },
+  { key: "bp", label: "BP", type: "text", width: "100px" },
+  { key: "weight", label: "Weight (kg)", type: "number", width: "100px" },
+  { key: "height", label: "Height (cm)", type: "number", width: "100px" },
+  { key: "obHistory", label: "OB History", type: "text" },
+  { key: "lmp", label: "LMP", type: "date" },
+  { key: "aog", label: "AOG (weeks)", type: "number", width: "100px" },
+  { key: "fetalHeart", label: "Fetal Heart", type: "text", width: "110px" },
+  { key: "presentation", label: "Presentation", type: "select", options: ["Cephalic", "Breech", "Transverse", "Oblique"] },
+  { key: "assessment", label: "Assessment", type: "text" },
+  { key: "plan", label: "Plan", type: "text" },
+];
+
 // ── FHSIS Monthly Columns ──
 const fhsisColumns: ColumnDef[] = [
   { key: "indicator", label: "Health Indicator", type: "text" },
@@ -299,6 +315,7 @@ function TCLContent() {
 // ── Main Forms & Reports Page ──
 export default function FormsReports() {
   const [familyData, setFamilyData] = useState<Record<string, any>[]>([]);
+  const [prenatalData, setPrenatalData] = useState<Record<string, any>[]>([]);
   const [nutritionData, setNutritionData] = useState<Record<string, any>[]>([]);
   const [vaccineData, setVaccineData] = useState<Record<string, any>[]>([]);
   const [fhsisData, setFhsisData] = useState<Record<string, any>[]>(fhsisDefaultData);
@@ -313,6 +330,7 @@ export default function FormsReports() {
       <Tabs defaultValue="family-health" className="space-y-6">
         <TabsList className="flex flex-wrap h-auto gap-1 bg-muted p-1.5 rounded-lg">
           <TabsTrigger value="family-health" className="text-xs sm:text-sm">Family Health</TabsTrigger>
+          <TabsTrigger value="prenatal" className="text-xs sm:text-sm">Prenatal</TabsTrigger>
           <TabsTrigger value="tcl" className="text-xs sm:text-sm">Target Client List</TabsTrigger>
           <TabsTrigger value="nutrition" className="text-xs sm:text-sm">Nutrition Report</TabsTrigger>
           <TabsTrigger value="vaccine" className="text-xs sm:text-sm">Vaccine Report</TabsTrigger>
@@ -323,6 +341,13 @@ export default function FormsReports() {
         <TabsContent value="family-health" className="space-y-4">
           <FormHeader title="Family Health Profiling Form" description="Household-level health data collection" />
           <DynamicTable columns={familyHealthColumns} data={familyData} onChange={setFamilyData} />
+          <FormActions />
+        </TabsContent>
+
+        {/* Prenatal */}
+        <TabsContent value="prenatal" className="space-y-4">
+          <FormHeader title="Prenatal Care Record" description="Maternal and infant health monitoring during pregnancy" />
+          <DynamicTable columns={prenatalColumns} data={prenatalData} onChange={setPrenatalData} />
           <FormActions />
         </TabsContent>
 
