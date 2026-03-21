@@ -165,6 +165,23 @@ const nutritionColumns: ColumnDef[] = [
   { key: "feeding", label: "Feeding Program", type: "checkbox" },
 ];
 
+// ── Vaccine Report Columns ──
+const vaccineReportColumns: ColumnDef[] = [
+  { key: "date", label: "Date", type: "date" },
+  { key: "vaccineName", label: "Vaccine Name", type: "text" },
+  { key: "lotNumber", label: "Lot Number", type: "text", width: "120px" },
+  { key: "expirationDate", label: "Expiration Date", type: "date" },
+  { key: "vialsPrevMonth", label: "No. of Vials from Prev. Month (F)", type: "number", width: "160px" },
+  { key: "dosesPrevMonth", label: "No. of Doses from Prev. Month (G)", type: "number", width: "160px" },
+  { key: "dosesReceived", label: "No. of Doses Received (H)", type: "number", width: "160px" },
+  { key: "dosesDistributed", label: "No. of Doses Distributed to Other BHIs", type: "number", width: "180px" },
+  { key: "totalRemaining", label: "Total Remaining Doses (F+G)-H", type: "number", width: "180px" },
+  { key: "vialsUsed", label: "No. of Vials Used (I)", type: "number", width: "140px" },
+  { key: "dosesUsed", label: "No. of Doses Used (J)", type: "number", width: "140px" },
+  { key: "wastage", label: "Wastage (K)", type: "number", width: "120px" },
+  { key: "remainingDoses", label: "Remaining Doses I-(J+K)", type: "number", width: "160px" },
+];
+
 // ── FHSIS Monthly Columns ──
 const fhsisColumns: ColumnDef[] = [
   { key: "indicator", label: "Health Indicator", type: "text" },
@@ -283,6 +300,7 @@ function TCLContent() {
 export default function FormsReports() {
   const [familyData, setFamilyData] = useState<Record<string, any>[]>([]);
   const [nutritionData, setNutritionData] = useState<Record<string, any>[]>([]);
+  const [vaccineData, setVaccineData] = useState<Record<string, any>[]>([]);
   const [fhsisData, setFhsisData] = useState<Record<string, any>[]>(fhsisDefaultData);
 
   return (
@@ -297,6 +315,7 @@ export default function FormsReports() {
           <TabsTrigger value="family-health" className="text-xs sm:text-sm">Family Health</TabsTrigger>
           <TabsTrigger value="tcl" className="text-xs sm:text-sm">Target Client List</TabsTrigger>
           <TabsTrigger value="nutrition" className="text-xs sm:text-sm">Nutrition Report</TabsTrigger>
+          <TabsTrigger value="vaccine" className="text-xs sm:text-sm">Vaccine Report</TabsTrigger>
           <TabsTrigger value="fhsis" className="text-xs sm:text-sm">FHSIS Monthly</TabsTrigger>
         </TabsList>
 
@@ -316,6 +335,13 @@ export default function FormsReports() {
         <TabsContent value="nutrition" className="space-y-4">
           <FormHeader title="Nutrition Report" description="Monthly nutrition status tracking for children" />
           <DynamicTable columns={nutritionColumns} data={nutritionData} onChange={setNutritionData} />
+          <FormActions />
+        </TabsContent>
+
+        {/* Vaccine Report */}
+        <TabsContent value="vaccine" className="space-y-4">
+          <FormHeader title="Vaccine Report" description="Monthly vaccine inventory and distribution tracking" />
+          <DynamicTable columns={vaccineReportColumns} data={vaccineData} onChange={setVaccineData} />
           <FormActions />
         </TabsContent>
 
