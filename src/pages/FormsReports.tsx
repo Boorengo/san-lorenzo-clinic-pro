@@ -344,6 +344,13 @@ export default function FormsReports() {
           <FormActions />
         </TabsContent>
 
+        {/* Prenatal */}
+        <TabsContent value="prenatal" className="space-y-4">
+          <FormHeader title="Prenatal Care Record" description="Maternal and infant health monitoring during pregnancy" />
+          <DynamicTable columns={prenatalColumns} data={prenatalData} onChange={setPrenatalData} />
+          <FormActions />
+        </TabsContent>
+
         {/* TCL */}
         <TabsContent value="tcl">
           <TCLContent />
