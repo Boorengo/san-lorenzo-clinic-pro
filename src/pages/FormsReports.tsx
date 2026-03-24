@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Save, Printer, Plus } from "lucide-react";
+import { Save, Printer, Plus, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import DynamicTable, { ColumnDef } from "@/components/DynamicTable";
+import FormEntryModal from "@/components/FormEntryModal";
 
 // ── TCL sub-types ──
 const tclTypes = [
@@ -266,21 +265,92 @@ function FormActions() {
   );
 }
 
+// ── Form card that opens a modal ──
+function FormCard({
+  title,
+  description,
+  columns,
+  data,
+  onAddRecord,
+}: {
+  title: string;
+  description: string;
+  columns: ColumnDef[];
+  data: Record<string, any>[];
+  onAddRecord: (record: Record<string, any>) => void;
+}) {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <FormHeader title={title} description={description} />
+        <Button
+          onClick={() => setModalOpen(true)}
+          className="healthcare-gradient text-primary-foreground border-0 gap-1.5"
+        >
+          <Plus className="h-4 w-4" /> New Record
+        </Button>
+      </div>
+
+      {/* Show saved records as read-only table */}
+      {data.length > 0 && (
+        <DynamicTable columns={columns} data={data} readOnly />
+      )}
+
+      {data.length === 0 && (
+        <div className="rounded-xl border border-dashed border-muted-foreground/30 bg-muted/20 p-12 text-center">
+          <FileText className="h-10 w-10 mx-auto text-muted-foreground/50 mb-3" />
+          <p className="text-muted-foreground font-medium">No records yet</p>
+          <p className="text-sm text-muted-foreground/70 mt-1">Click "New Record" to add an entry</p>
+        </div>
+      )}
+
+      <FormActions />
+
+      <FormEntryModal
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+        title={title}
+        description={`Fill out the ${title.toLowerCase()} form`}
+        columns={columns}
+        onSave={onAddRecord}
+      />
+    </div>
+  );
+}
+
 // ── TCL Tab Content ──
 function TCLContent() {
   const [activeTcl, setActiveTcl] = useState("prenatal");
   const [tclData, setTclData] = useState<Record<string, Record<string, any>[]>>({});
+  const [modalOpen, setModalOpen] = useState(false);
 
   const currentData = tclData[activeTcl] || [];
   const currentColumns = tclColumns[activeTcl] || [];
   const currentLabel = tclTypes.find(t => t.id === activeTcl)?.label || "";
 
+  const handleAddRecord = (record: Record<string, any>) => {
+    setTclData(prev => ({
+      ...prev,
+      [activeTcl]: [...(prev[activeTcl] || []), record],
+    }));
+  };
+
   return (
     <div className="space-y-4">
-      <FormHeader
-        title="Target Client List (Doctor Logbook)"
-        description="Select the type of TCL logbook to fill out"
-      />
+      <div className="flex items-center justify-between">
+        <FormHeader
+          title="Target Client List (Doctor Logbook)"
+          description="Select the type of TCL logbook to fill out"
+        />
+        <Button
+          onClick={() => setModalOpen(true)}
+          className="healthcare-gradient text-primary-foreground border-0 gap-1.5"
+        >
+          <Plus className="h-4 w-4" /> New Record
+        </Button>
+      </div>
 
       {/* TCL Type Selector */}
       <div className="space-y-1">
@@ -301,13 +371,26 @@ function TCLContent() {
         <p className="text-sm font-medium text-primary">Currently editing: <span className="font-semibold">{currentLabel}</span></p>
       </div>
 
-      <DynamicTable
-        columns={currentColumns}
-        data={currentData}
-        onChange={(newData) => setTclData(prev => ({ ...prev, [activeTcl]: newData }))}
-      />
+      {currentData.length > 0 ? (
+        <DynamicTable columns={currentColumns} data={currentData} readOnly />
+      ) : (
+        <div className="rounded-xl border border-dashed border-muted-foreground/30 bg-muted/20 p-12 text-center">
+          <FileText className="h-10 w-10 mx-auto text-muted-foreground/50 mb-3" />
+          <p className="text-muted-foreground font-medium">No records yet</p>
+          <p className="text-sm text-muted-foreground/70 mt-1">Click "New Record" to add an entry</p>
+        </div>
+      )}
 
       <FormActions />
+
+      <FormEntryModal
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+        title={currentLabel}
+        description={`Fill out the ${currentLabel} form`}
+        columns={currentColumns}
+        onSave={handleAddRecord}
+      />
     </div>
   );
 }
@@ -338,17 +421,25 @@ export default function FormsReports() {
         </TabsList>
 
         {/* Family Health */}
-        <TabsContent value="family-health" className="space-y-4">
-          <FormHeader title="Family Health Profiling Form" description="Household-level health data collection" />
-          <DynamicTable columns={familyHealthColumns} data={familyData} onChange={setFamilyData} />
-          <FormActions />
+        <TabsContent value="family-health">
+          <FormCard
+            title="Family Health Profiling Form"
+            description="Household-level health data collection"
+            columns={familyHealthColumns}
+            data={familyData}
+            onAddRecord={(r) => setFamilyData(prev => [...prev, r])}
+          />
         </TabsContent>
 
         {/* Prenatal */}
-        <TabsContent value="prenatal" className="space-y-4">
-          <FormHeader title="Prenatal Care Record" description="Maternal and infant health monitoring during pregnancy" />
-          <DynamicTable columns={prenatalColumns} data={prenatalData} onChange={setPrenatalData} />
-          <FormActions />
+        <TabsContent value="prenatal">
+          <FormCard
+            title="Prenatal Care Record"
+            description="Maternal and infant health monitoring during pregnancy"
+            columns={prenatalColumns}
+            data={prenatalData}
+            onAddRecord={(r) => setPrenatalData(prev => [...prev, r])}
+          />
         </TabsContent>
 
         {/* TCL */}
@@ -357,20 +448,28 @@ export default function FormsReports() {
         </TabsContent>
 
         {/* Nutrition */}
-        <TabsContent value="nutrition" className="space-y-4">
-          <FormHeader title="Nutrition Report" description="Monthly nutrition status tracking for children" />
-          <DynamicTable columns={nutritionColumns} data={nutritionData} onChange={setNutritionData} />
-          <FormActions />
+        <TabsContent value="nutrition">
+          <FormCard
+            title="Nutrition Report"
+            description="Monthly nutrition status tracking for children"
+            columns={nutritionColumns}
+            data={nutritionData}
+            onAddRecord={(r) => setNutritionData(prev => [...prev, r])}
+          />
         </TabsContent>
 
         {/* Vaccine Report */}
-        <TabsContent value="vaccine" className="space-y-4">
-          <FormHeader title="Vaccine Report" description="Monthly vaccine inventory and distribution tracking" />
-          <DynamicTable columns={vaccineReportColumns} data={vaccineData} onChange={setVaccineData} />
-          <FormActions />
+        <TabsContent value="vaccine">
+          <FormCard
+            title="Vaccine Report"
+            description="Monthly vaccine inventory and distribution tracking"
+            columns={vaccineReportColumns}
+            data={vaccineData}
+            onAddRecord={(r) => setVaccineData(prev => [...prev, r])}
+          />
         </TabsContent>
 
-        {/* FHSIS */}
+        {/* FHSIS - keep as inline table since it's a monthly summary */}
         <TabsContent value="fhsis" className="space-y-4">
           <FormHeader title="FHSIS Monthly Report" description="Field Health Service Information System monthly summary" />
           <DynamicTable columns={fhsisColumns} data={fhsisData} onChange={setFhsisData} />
