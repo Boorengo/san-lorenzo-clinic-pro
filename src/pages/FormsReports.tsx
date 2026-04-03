@@ -518,6 +518,9 @@ export default function FormsReports() {
   const [prenatalData, setPrenatalData] = useState<Record<string, any>[]>([]);
   const [nutritionData, setNutritionData] = useState<Record<string, any>[]>([]);
   const [vaccineData, setVaccineData] = useState<Record<string, any>[]>([]);
+  const [ncdData, setNcdData] = useState<Record<string, any>[]>([]);
+  const [eccdData, setEccdData] = useState<Record<string, any>[]>([]);
+  const [homeBasedData, setHomeBasedData] = useState<Record<string, any>[]>([]);
   const [fhsisData, setFhsisData] = useState<Record<string, any>[]>(fhsisDefaultData);
 
   return (
