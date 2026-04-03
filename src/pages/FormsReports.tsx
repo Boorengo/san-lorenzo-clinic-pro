@@ -592,6 +592,39 @@ export default function FormsReports() {
           />
         </TabsContent>
 
+        {/* NCD High-Risk Assessment */}
+        <TabsContent value="ncd">
+          <FormCard
+            title="NCD High-Risk Assessment"
+            description="Community case finding form for angina, heart attack, stroke, or TIA"
+            columns={ncdColumns}
+            data={ncdData}
+            onAddRecord={(r) => setNcdData(prev => [...prev, r])}
+          />
+        </TabsContent>
+
+        {/* ECCD Card */}
+        <TabsContent value="eccd">
+          <FormCard
+            title="ECCD Card"
+            description="Early Childhood Care and Development card for child health tracking"
+            columns={eccdColumns}
+            data={eccdData}
+            onAddRecord={(r) => setEccdData(prev => [...prev, r])}
+          />
+        </TabsContent>
+
+        {/* Home-Based Mother Record */}
+        <TabsContent value="home-based">
+          <FormCard
+            title="Home-Based Mother Record"
+            description="Pangtahanang pangangalaga matapos manganak"
+            columns={homeBasedMotherColumns}
+            data={homeBasedData}
+            onAddRecord={(r) => setHomeBasedData(prev => [...prev, r])}
+          />
+        </TabsContent>
+
         {/* FHSIS - keep as inline table since it's a monthly summary */}
         <TabsContent value="fhsis" className="space-y-4">
           <FormHeader title="FHSIS Monthly Report" description="Field Health Service Information System monthly summary" />
