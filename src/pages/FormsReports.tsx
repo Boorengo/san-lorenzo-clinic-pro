@@ -527,17 +527,6 @@ export default function FormsReports() {
           <TCLContent />
         </TabsContent>
 
-        {/* Nutrition */}
-        <TabsContent value="nutrition">
-          <FormCard
-            title="Nutrition Report"
-            description="Monthly nutrition status tracking for children"
-            columns={nutritionColumns}
-            data={nutritionData}
-            onAddRecord={(r) => setNutritionData(prev => [...prev, r])}
-          />
-        </TabsContent>
-
         {/* Vaccine Report */}
         <TabsContent value="vaccine">
           <FormCard
