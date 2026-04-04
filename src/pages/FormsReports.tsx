@@ -140,29 +140,8 @@ const tclColumns: Record<string, ColumnDef[]> = {
   ],
 };
 
-// ── Family Health Columns ──
-const familyHealthColumns: ColumnDef[] = [
-  { key: "name", label: "Family Member", type: "text" },
-  { key: "age", label: "Age", type: "number", width: "80px" },
-  { key: "sex", label: "Sex", type: "select", options: ["M", "F"] },
-  { key: "pregnant", label: "Pregnant", type: "checkbox" },
-  { key: "bp", label: "Blood Pressure", type: "text" },
-  { key: "weight", label: "Weight (kg)", type: "number", width: "100px" },
-  { key: "height", label: "Height (cm)", type: "number", width: "100px" },
-  { key: "bmi", label: "BMI", type: "number", width: "80px" },
-  { key: "diagnosis", label: "Diagnosis", type: "text" },
-  { key: "remarks", label: "Remarks", type: "text" },
-];
 
-// ── Nutrition Columns ──
-const nutritionColumns: ColumnDef[] = [
-  { key: "name", label: "Child Name", type: "text" },
-  { key: "age", label: "Age (months)", type: "number", width: "100px" },
-  { key: "weight", label: "Weight (kg)", type: "number", width: "100px" },
-  { key: "height", label: "Height (cm)", type: "number", width: "100px" },
-  { key: "status", label: "Nutritional Status", type: "select", options: ["Normal", "Underweight", "Overweight", "Severely Underweight"] },
-  { key: "feeding", label: "Feeding Program", type: "checkbox" },
-];
+
 
 // ── Vaccine Report Columns ──
 const vaccineReportColumns: ColumnDef[] = [
@@ -181,21 +160,6 @@ const vaccineReportColumns: ColumnDef[] = [
   { key: "remainingDoses", label: "Remaining Doses I-(J+K)", type: "number", width: "160px" },
 ];
 
-// ── Prenatal Columns ──
-const prenatalColumns: ColumnDef[] = [
-  { key: "date", label: "Date", type: "date" },
-  { key: "infantName", label: "Name of Infant", type: "text" },
-  { key: "bp", label: "BP", type: "text", width: "100px" },
-  { key: "weight", label: "Weight (kg)", type: "number", width: "100px" },
-  { key: "height", label: "Height (cm)", type: "number", width: "100px" },
-  { key: "obHistory", label: "OB History", type: "text" },
-  { key: "lmp", label: "LMP", type: "date" },
-  { key: "aog", label: "AOG (weeks)", type: "number", width: "100px" },
-  { key: "fetalHeart", label: "Fetal Heart", type: "text", width: "110px" },
-  { key: "presentation", label: "Presentation", type: "select", options: ["Cephalic", "Breech", "Transverse", "Oblique"] },
-  { key: "assessment", label: "Assessment", type: "text" },
-  { key: "plan", label: "Plan", type: "text" },
-];
 
 // ── NCD High-Risk Assessment Columns ──
 const ncdColumns: ColumnDef[] = [
@@ -514,9 +478,6 @@ function TCLContent() {
 
 // ── Main Forms & Reports Page ──
 export default function FormsReports() {
-  const [familyData, setFamilyData] = useState<Record<string, any>[]>([]);
-  const [prenatalData, setPrenatalData] = useState<Record<string, any>[]>([]);
-  const [nutritionData, setNutritionData] = useState<Record<string, any>[]>([]);
   const [vaccineData, setVaccineData] = useState<Record<string, any>[]>([]);
   const [ncdData, setNcdData] = useState<Record<string, any>[]>([]);
   const [eccdData, setEccdData] = useState<Record<string, any>[]>([]);
@@ -530,12 +491,9 @@ export default function FormsReports() {
         <p className="text-sm text-muted-foreground">Select a form to fill out or generate reports</p>
       </div>
 
-      <Tabs defaultValue="family-health" className="space-y-6">
+      <Tabs defaultValue="tcl" className="space-y-6">
         <TabsList className="flex flex-wrap h-auto gap-1 bg-muted p-1.5 rounded-lg">
-          <TabsTrigger value="family-health" className="text-xs sm:text-sm">Family Health</TabsTrigger>
-          <TabsTrigger value="prenatal" className="text-xs sm:text-sm">Prenatal</TabsTrigger>
           <TabsTrigger value="tcl" className="text-xs sm:text-sm">Target Client List</TabsTrigger>
-          <TabsTrigger value="nutrition" className="text-xs sm:text-sm">Nutrition Report</TabsTrigger>
           <TabsTrigger value="vaccine" className="text-xs sm:text-sm">Vaccine Report</TabsTrigger>
           <TabsTrigger value="ncd" className="text-xs sm:text-sm">NCD Assessment</TabsTrigger>
           <TabsTrigger value="eccd" className="text-xs sm:text-sm">ECCD Card</TabsTrigger>
@@ -543,42 +501,9 @@ export default function FormsReports() {
           <TabsTrigger value="fhsis" className="text-xs sm:text-sm">FHSIS Monthly</TabsTrigger>
         </TabsList>
 
-        {/* Family Health */}
-        <TabsContent value="family-health">
-          <FormCard
-            title="Family Health Profiling Form"
-            description="Household-level health data collection"
-            columns={familyHealthColumns}
-            data={familyData}
-            onAddRecord={(r) => setFamilyData(prev => [...prev, r])}
-          />
-        </TabsContent>
-
-        {/* Prenatal */}
-        <TabsContent value="prenatal">
-          <FormCard
-            title="Prenatal Care Record"
-            description="Maternal and infant health monitoring during pregnancy"
-            columns={prenatalColumns}
-            data={prenatalData}
-            onAddRecord={(r) => setPrenatalData(prev => [...prev, r])}
-          />
-        </TabsContent>
-
         {/* TCL */}
         <TabsContent value="tcl">
           <TCLContent />
-        </TabsContent>
-
-        {/* Nutrition */}
-        <TabsContent value="nutrition">
-          <FormCard
-            title="Nutrition Report"
-            description="Monthly nutrition status tracking for children"
-            columns={nutritionColumns}
-            data={nutritionData}
-            onAddRecord={(r) => setNutritionData(prev => [...prev, r])}
-          />
         </TabsContent>
 
         {/* Vaccine Report */}
