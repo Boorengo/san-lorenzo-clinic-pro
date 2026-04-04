@@ -522,28 +522,6 @@ export default function FormsReports() {
           <TabsTrigger value="fhsis" className="text-xs sm:text-sm">FHSIS Monthly</TabsTrigger>
         </TabsList>
 
-        {/* Family Health */}
-        <TabsContent value="family-health">
-          <FormCard
-            title="Family Health Profiling Form"
-            description="Household-level health data collection"
-            columns={familyHealthColumns}
-            data={familyData}
-            onAddRecord={(r) => setFamilyData(prev => [...prev, r])}
-          />
-        </TabsContent>
-
-        {/* Prenatal */}
-        <TabsContent value="prenatal">
-          <FormCard
-            title="Prenatal Care Record"
-            description="Maternal and infant health monitoring during pregnancy"
-            columns={prenatalColumns}
-            data={prenatalData}
-            onAddRecord={(r) => setPrenatalData(prev => [...prev, r])}
-          />
-        </TabsContent>
-
         {/* TCL */}
         <TabsContent value="tcl">
           <TCLContent />
