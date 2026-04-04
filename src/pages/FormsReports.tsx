@@ -140,29 +140,8 @@ const tclColumns: Record<string, ColumnDef[]> = {
   ],
 };
 
-// ── Family Health Columns ──
-const familyHealthColumns: ColumnDef[] = [
-  { key: "name", label: "Family Member", type: "text" },
-  { key: "age", label: "Age", type: "number", width: "80px" },
-  { key: "sex", label: "Sex", type: "select", options: ["M", "F"] },
-  { key: "pregnant", label: "Pregnant", type: "checkbox" },
-  { key: "bp", label: "Blood Pressure", type: "text" },
-  { key: "weight", label: "Weight (kg)", type: "number", width: "100px" },
-  { key: "height", label: "Height (cm)", type: "number", width: "100px" },
-  { key: "bmi", label: "BMI", type: "number", width: "80px" },
-  { key: "diagnosis", label: "Diagnosis", type: "text" },
-  { key: "remarks", label: "Remarks", type: "text" },
-];
 
-// ── Nutrition Columns ──
-const nutritionColumns: ColumnDef[] = [
-  { key: "name", label: "Child Name", type: "text" },
-  { key: "age", label: "Age (months)", type: "number", width: "100px" },
-  { key: "weight", label: "Weight (kg)", type: "number", width: "100px" },
-  { key: "height", label: "Height (cm)", type: "number", width: "100px" },
-  { key: "status", label: "Nutritional Status", type: "select", options: ["Normal", "Underweight", "Overweight", "Severely Underweight"] },
-  { key: "feeding", label: "Feeding Program", type: "checkbox" },
-];
+
 
 // ── Vaccine Report Columns ──
 const vaccineReportColumns: ColumnDef[] = [
