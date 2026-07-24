@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.jpg";
+import ChatbotWidget from "@/components/ChatbotWidget";
 
 const faqs = [
   { q: "Ano ang mga serbisyo ng health center?", a: "Nagbibigay kami ng prenatal care, immunization, family planning, konsultasyon, TB-DOTS, at iba pang primary health care services." },
@@ -389,6 +390,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <ChatbotWidget />
     </div>
   );
 }
