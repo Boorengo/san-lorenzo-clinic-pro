@@ -11,17 +11,31 @@ import {
   LogOut,
   Menu,
   X,
+  BarChart3,
+  Stethoscope,
+  ArrowUpRight,
+  FlaskConical,
+  ScanLine,
+  Shield,
+  ScrollText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.jpg";
 
 const navItems = [
   { title: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+  { title: "Analytics", path: "/dashboard/analytics", icon: BarChart3 },
   { title: "Patients", path: "/dashboard/patients", icon: Users },
-  { title: "Forms & Reports", path: "/dashboard/forms", icon: FileText },
+  { title: "Consultations", path: "/dashboard/consultations", icon: Stethoscope },
+  { title: "Lab Results", path: "/dashboard/lab-results", icon: FlaskConical },
+  { title: "Referrals", path: "/dashboard/referrals", icon: ArrowUpRight },
   { title: "Immunization", path: "/dashboard/immunization", icon: Syringe },
+  { title: "Forms & Reports", path: "/dashboard/forms", icon: FileText },
+  { title: "Paper Scanner", path: "/dashboard/scanner", icon: ScanLine },
   { title: "Inventory", path: "/dashboard/inventory", icon: Package },
   { title: "Documents", path: "/dashboard/documents", icon: FileOutput },
+  { title: "Audit Log", path: "/dashboard/audit-log", icon: ScrollText },
+  { title: "Security", path: "/dashboard/security", icon: Shield },
   { title: "Settings", path: "/dashboard/settings", icon: Settings },
 ];
 

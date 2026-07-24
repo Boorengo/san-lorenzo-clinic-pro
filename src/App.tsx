@@ -15,6 +15,13 @@ import Immunization from "./pages/Immunization";
 import Inventory from "./pages/Inventory";
 import Documents from "./pages/Documents";
 import Settings from "./pages/Settings";
+import Analytics from "./pages/Analytics";
+import Consultations from "./pages/Consultations";
+import Referrals from "./pages/Referrals";
+import LabResults from "./pages/LabResults";
+import AuditLog from "./pages/AuditLog";
+import Security from "./pages/Security";
+import Scanner from "./pages/Scanner";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -51,6 +58,13 @@ const App = () => (
             <Route path="immunization" element={<Immunization />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="documents" element={<Documents />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="consultations" element={<Consultations />} />
+            <Route path="referrals" element={<Referrals />} />
+            <Route path="lab-results" element={<LabResults />} />
+            <Route path="scanner" element={<Scanner />} />
+            <Route path="audit-log" element={<AuditLog />} />
+            <Route path="security" element={<Security />} />
             <Route path="settings" element={<Settings />} />
           </Route>
           <Route path="*" element={<NotFound />} />
