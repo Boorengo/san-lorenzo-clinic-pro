@@ -7,7 +7,13 @@ import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.jpg";
 
-type LoginRole = "user" | "staff";
+type LoginRole = "user" | "staff" | "doctor";
+
+const roleCopy: Record<LoginRole, { label: string; hint: string; credential: string }> = {
+  user: { label: "Resident", hint: "Para sa mga residente ng San Lorenzo Ruiz 1", credential: "Email" },
+  staff: { label: "Staff", hint: "BHW, midwife, at clinic administrative staff", credential: "Staff ID" },
+  doctor: { label: "Doctor", hint: "Physician on duty — clinical records access", credential: "PRC License No." },
+};
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,12 +25,11 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("role", role);
     setTimeout(() => {
-      if (role === "staff") {
-        navigate("/dashboard");
-      } else {
-        navigate("/my-profile");
-      }
+      if (role === "staff") navigate("/dashboard");
+      else if (role === "doctor") navigate("/doctor");
+      else navigate("/my-profile");
     }, 500);
   };
 
@@ -80,37 +85,37 @@ export default function Login() {
           </div>
 
           {/* Role selector */}
-          <div className="flex rounded-lg border bg-muted/50 p-1 gap-1">
-            <button
-              type="button"
-              onClick={() => setRole("user")}
-              className={`flex-1 flex items-center justify-center gap-2 rounded-md px-3 py-2.5 text-xs font-medium transition-all ${
-                role === "user"
-                  ? "bg-card shadow-sm text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <User className="h-3.5 w-3.5" />
-              User
-            </button>
-            <button
-              type="button"
-              onClick={() => setRole("staff")}
-              className={`flex-1 flex items-center justify-center gap-2 rounded-md px-3 py-2.5 text-xs font-medium transition-all ${
-                role === "staff"
-                  ? "bg-card shadow-sm text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <Building2 className="h-3.5 w-3.5" />
-              Staff
-            </button>
+          <div>
+            <div className="flex rounded-lg border bg-muted/50 p-1 gap-1" role="tablist" aria-label="Select account type">
+              {([
+                { key: "user" as const, icon: User },
+                { key: "staff" as const, icon: Building2 },
+                { key: "doctor" as const, icon: Stethoscope },
+              ]).map(({ key, icon: Icon }) => (
+                <button
+                  key={key}
+                  type="button"
+                  role="tab"
+                  aria-selected={role === key}
+                  onClick={() => setRole(key)}
+                  className={`flex-1 flex items-center justify-center gap-1.5 rounded-md px-2 py-2.5 text-xs font-medium transition-all ${
+                    role === key
+                      ? "bg-card shadow-sm text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                  {roleCopy[key].label}
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 text-[11px] text-muted-foreground text-center">{roleCopy[role].hint}</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-1.5">
-              <Label className="text-xs font-medium">{role === "staff" ? "Username" : "Email"}</Label>
-              <Input placeholder={role === "staff" ? "Enter username" : "Enter email"} required className="h-11" />
+              <Label className="text-xs font-medium">{roleCopy[role].credential}</Label>
+              <Input placeholder={`Enter ${roleCopy[role].credential.toLowerCase()}`} required className="h-11" />
             </div>
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
@@ -126,9 +131,14 @@ export default function Login() {
                 </button>
               </div>
             </div>
+            {role !== "user" && (
+              <p className="rounded-lg border border-warning/40 bg-warning/10 px-3 py-2 text-[11px] leading-relaxed text-foreground">
+                Ang lahat ng pag-access sa health records ay naitatala sa audit log alinsunod sa RA 10173.
+              </p>
+            )}
             <Button type="submit" className="w-full h-11 healthcare-gradient text-primary-foreground border-0 gap-2 shadow-md hover:shadow-lg transition-shadow" disabled={loading}>
               <LogIn className="h-4 w-4" />
-              {loading ? "Signing in..." : `Sign In as ${role === "staff" ? "Staff" : "User"}`}
+              {loading ? "Signing in..." : `Sign In as ${roleCopy[role].label}`}
             </Button>
           </form>
 

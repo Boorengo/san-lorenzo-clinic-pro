@@ -97,6 +97,30 @@
     --hero-gradient-start: 160 30% 12%;
     --hero-gradient-end: 45 30% 12%;
   }
+  /* Accessibility preferences (DOH-style utility bar) */
+  html.text-scale-1 { font-size: 109%; }
+  html.text-scale-2 { font-size: 118%; }
+
+  html.high-contrast {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 20%;
+    --border: 0 0% 30%;
+    --input: 0 0% 30%;
+    --primary: 160 90% 18%;
+    --secondary: 45 100% 40%;
+    --accent: 160 25% 88%;
+    --accent-foreground: 0 0% 0%;
+    --ring: 0 0% 0%;
+  }
+
+  html.high-contrast .card-hover,
+  html.high-contrast .glass {
+    backdrop-filter: none;
+  }
 }
 
 @layer base {

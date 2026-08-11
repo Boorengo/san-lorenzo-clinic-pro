@@ -5,6 +5,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.jpg";
 import ChatbotWidget from "@/components/ChatbotWidget";
+import AccessibilityBar from "@/components/home/AccessibilityBar";
+import AdvisoryBanner from "@/components/home/AdvisoryBanner";
+import ClinicStatusStrip from "@/components/home/ClinicStatusStrip";
+import QuickActions from "@/components/home/QuickActions";
+import AnnouncementsBoard from "@/components/home/AnnouncementsBoard";
+import EmergencyDirectory from "@/components/home/EmergencyDirectory";
 
 const faqs = [
   { q: "Ano ang mga serbisyo ng health center?", a: "Nagbibigay kami ng prenatal care, immunization, family planning, konsultasyon, TB-DOTS, at iba pang primary health care services." },
@@ -54,6 +60,8 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       {/* Navbar */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b glass">
+        <AccessibilityBar />
+        <AdvisoryBanner />
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-2.5 group">
             <img src={logo} alt="BHC San Lorenzo Ruiz 1 Logo" className="h-10 w-10 rounded-full object-cover shadow-md group-hover:shadow-lg transition-shadow" />
@@ -132,8 +140,9 @@ export default function Home() {
         </AnimatePresence>
       </header>
 
+      <main id="main-content">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-16">
+      <section className="relative overflow-hidden pt-36 sm:pt-32">
         {/* Background blobs */}
         <div className="hero-blob w-96 h-96 bg-primary/20 -top-20 -left-20" style={{ position: "absolute" }} />
         <div className="hero-blob w-80 h-80 bg-secondary/20 -bottom-10 -right-10" style={{ position: "absolute" }} />
@@ -209,6 +218,9 @@ export default function Home() {
         </div>
       </section>
 
+      <ClinicStatusStrip />
+      <QuickActions />
+
       {/* About */}
       <section id="about" className="bg-background">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:py-24">
@@ -279,6 +291,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <AnnouncementsBoard />
+      <EmergencyDirectory />
 
       {/* FAQs */}
       <section id="faqs" className="border-t bg-background">
@@ -369,6 +384,7 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+      </main>
 
       {/* Footer */}
       <footer className="border-t bg-card">
@@ -380,12 +396,17 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
               <button onClick={() => navigate("/patient-portal")} className="hover:text-foreground transition-colors">Patient Portal</button>
-              <button onClick={() => navigate("/login")} className="hover:text-foreground transition-colors">Staff Login</button>
+              <button onClick={() => navigate("/login")} className="hover:text-foreground transition-colors">Staff &amp; Doctor Login</button>
+              <a href="#programs" className="hover:text-foreground transition-colors">Announcements</a>
+              <a href="#hotlines" className="hover:text-foreground transition-colors">Hotlines</a>
               <button onClick={() => navigate("/data-privacy")} className="hover:text-foreground transition-colors">Data Privacy</button>
               <button onClick={() => navigate("/terms")} className="hover:text-foreground transition-colors">Terms of Service</button>
             </div>
           </div>
-          <div className="mt-6 pt-6 border-t text-center">
+          <div className="mt-6 pt-6 border-t text-center space-y-1.5">
+            <p className="text-[11px] text-muted-foreground">
+              Naaayon sa WCAG 2.1 AA accessibility standards at sa Data Privacy Act of 2012 (RA 10173).
+            </p>
             <p className="text-[11px] text-muted-foreground">© 2026 Barangay Health Center San Lorenzo Ruiz 1, Dasmariñas, Cavite. All rights reserved.</p>
           </div>
         </div>
