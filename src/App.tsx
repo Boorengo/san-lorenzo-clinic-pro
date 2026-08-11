@@ -4,6 +4,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StaffLayout from "./components/layout/StaffLayout";
+import DoctorLayout from "./components/layout/DoctorLayout";
+import DoctorDashboard from "./pages/doctor/DoctorDashboard";
+import DoctorQueue from "./pages/doctor/DoctorQueue";
+import Prescriptions from "./pages/doctor/Prescriptions";
+import FollowUps from "./pages/doctor/FollowUps";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Patients from "./pages/Patients";
@@ -65,6 +70,19 @@ const App = () => (
             <Route path="scanner" element={<Scanner />} />
             <Route path="audit-log" element={<AuditLog />} />
             <Route path="security" element={<Security />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          <Route path="/doctor" element={<DoctorLayout />}>
+            <Route index element={<DoctorDashboard />} />
+            <Route path="queue" element={<DoctorQueue />} />
+            <Route path="consultations" element={<Consultations />} />
+            <Route path="patients" element={<Patients />} />
+            <Route path="patients/:id" element={<PatientProfile />} />
+            <Route path="lab-results" element={<LabResults />} />
+            <Route path="immunization" element={<Immunization />} />
+            <Route path="prescriptions" element={<Prescriptions />} />
+            <Route path="follow-ups" element={<FollowUps />} />
+            <Route path="referrals" element={<Referrals />} />
             <Route path="settings" element={<Settings />} />
           </Route>
           <Route path="*" element={<NotFound />} />

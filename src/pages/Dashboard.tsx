@@ -14,17 +14,43 @@ const chartData = [
 export default function Dashboard() {
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="font-display text-2xl font-bold">Dashboard</h1>
-        <p className="text-sm text-muted-foreground">Overview of Barangay Health Center operations</p>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="font-display text-2xl font-bold">Clinic Operations</h1>
+          <p className="text-sm text-muted-foreground">
+            Administrative overview — registration, queue, supplies, at FHSIS coverage.
+          </p>
+        </div>
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-secondary/40 bg-secondary/15 px-2.5 py-1 text-[11px] font-semibold text-secondary-foreground">
+          <span className="h-1.5 w-1.5 rounded-full bg-secondary" aria-hidden="true" />
+          Staff Workspace
+        </span>
       </div>
 
       {/* Summary Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <SummaryCard title="Total Patients" value={248} icon={Users} description="+12 this month" variant="success" />
-        <SummaryCard title="Active Forms" value={15} icon={FileText} description="3 pending review" variant="info" />
-        <SummaryCard title="Immunizations" value={89} icon={Syringe} description="This month" variant="default" />
+        <SummaryCard title="Nakapila ngayon" value={12} icon={Users} description="Tinatayang hintay: 25 min" variant="info" />
+        <SummaryCard title="Bagong rehistro" value={7} icon={FileText} description="Ngayong linggo" variant="success" />
+        <SummaryCard title="Immunization coverage" value="78%" icon={Syringe} description="Target: 95% (FHSIS)" variant="default" />
         <SummaryCard title="Low Stock Alerts" value={4} icon={AlertTriangle} description="Items need restocking" variant="warning" />
+      </div>
+
+      {/* Operational coverage */}
+      <div className="rounded-xl border bg-card p-5">
+        <h2 className="mb-4 font-display text-sm font-semibold text-card-foreground">Program Coverage kada Block</h2>
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { label: "Konsulta enrollees", value: "412 / 620" },
+            { label: "Prenatal registrants", value: "34 / 40" },
+            { label: "Senior citizen registry", value: "218 / 240" },
+            { label: "Deworming (Blk 1–21)", value: "1,104 / 1,500" },
+          ].map((c) => (
+            <li key={c.label} className="rounded-lg border p-4">
+              <p className="text-xs text-muted-foreground">{c.label}</p>
+              <p className="mt-1 font-display text-lg font-bold text-card-foreground">{c.value}</p>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
