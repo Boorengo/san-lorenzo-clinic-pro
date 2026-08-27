@@ -139,6 +139,10 @@ export default function Home() {
               <div className="px-4 py-4 space-y-2 bg-card">
                 <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">About</a>
                 <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">Services</a>
+                <a href="#programs" onClick={() => { setMobileMenuOpen(false); setHasNewAnnouncement(false); }} className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">
+                  Announcements
+                  {hasNewAnnouncement && <span className="flex h-2 w-2 rounded-full bg-accent" aria-label="New announcement" />}
+                </a>
                 <a href="#faqs" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">FAQs</a>
                 <div className="border-t pt-3 mt-2 grid grid-cols-2 gap-2">
                   {isLoggedIn ? (
