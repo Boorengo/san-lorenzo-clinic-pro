@@ -46,9 +46,23 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hasNewAnnouncement, setHasNewAnnouncement] = useState(true);
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+  }, []);
+
+  useEffect(() => {
+    const section = document.getElementById("programs");
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) setHasNewAnnouncement(false);
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   const handleLogout = () => {
@@ -75,6 +89,12 @@ export default function Home() {
           <nav className="hidden md:flex items-center gap-1">
             <a href="#about" className="px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted">About</a>
             <a href="#services" className="px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted">Services</a>
+            <a href="#programs" className="relative px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted">
+              Announcements
+              {hasNewAnnouncement && (
+                <span className="absolute right-1.5 top-1.5 flex h-2 w-2 rounded-full bg-accent" aria-label="New announcement" />
+              )}
+            </a>
             <a href="#faqs" className="px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted">FAQs</a>
             <div className="w-px h-6 bg-border mx-2" />
             {isLoggedIn ? (
@@ -119,6 +139,10 @@ export default function Home() {
               <div className="px-4 py-4 space-y-2 bg-card">
                 <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">About</a>
                 <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">Services</a>
+                <a href="#programs" onClick={() => { setMobileMenuOpen(false); setHasNewAnnouncement(false); }} className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">
+                  Announcements
+                  {hasNewAnnouncement && <span className="flex h-2 w-2 rounded-full bg-accent" aria-label="New announcement" />}
+                </a>
                 <a href="#faqs" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted">FAQs</a>
                 <div className="border-t pt-3 mt-2 grid grid-cols-2 gap-2">
                   {isLoggedIn ? (
