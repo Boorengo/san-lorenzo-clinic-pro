@@ -85,6 +85,12 @@ export default function AnnouncementsBoard() {
                       {a.tag}
                     </span>
                     <time className="text-[11px] font-medium text-muted-foreground">{a.date}</time>
+                    {a.isNew && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-foreground">
+                        <span className="flex h-1.5 w-1.5 rounded-full bg-accent-foreground animate-pulse" aria-hidden="true" />
+                        Bago
+                      </span>
+                    )}
                   </div>
                   <h4 className="mt-2.5 font-display text-sm font-bold text-foreground">{a.title}</h4>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{a.body}</p>
