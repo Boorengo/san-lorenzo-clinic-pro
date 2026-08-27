@@ -46,9 +46,23 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hasNewAnnouncement, setHasNewAnnouncement] = useState(true);
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+  }, []);
+
+  useEffect(() => {
+    const section = document.getElementById("programs");
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) setHasNewAnnouncement(false);
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   const handleLogout = () => {
