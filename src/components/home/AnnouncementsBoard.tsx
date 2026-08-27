@@ -1,7 +1,24 @@
 import { motion } from "framer-motion";
 import { Megaphone, CalendarDays, MapPin } from "lucide-react";
 
-const announcements = [
+type Announcement = {
+  date: string;
+  tag: string;
+  tone: string;
+  title: string;
+  body: string;
+  isNew?: boolean;
+};
+
+const announcements: Announcement[] = [
+  {
+    date: "27 Ago 2026",
+    tag: "Bakunahan",
+    tone: "bg-primary/10 text-primary",
+    title: "Libreng Flu Vaccination Drive — Setyembre 5",
+    body: "Para sa mga senior, buntis, at may comorbidity. Dalhin ang barangay ID at ECCD card. Sa Main Hall, 8:00 AM – 12:00 NN.",
+    isNew: true,
+  },
   {
     date: "10 Ago 2026",
     tag: "Bakunahan",
